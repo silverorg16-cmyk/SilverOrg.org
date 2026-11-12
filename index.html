@@ -198,7 +198,7 @@
       padding: 2rem;
       text-align: center;
     }
-
+    https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80
     .feature-icon {
       width: 48px;
       height: 48px;
@@ -532,8 +532,7 @@
         </div>
       </div>
     </section>
-
-    <section class="security-section">
+    section class="security-section">
       <div class="security-content">
         <h2>Security & Trust</h2>
         <p style="color: var(--text-muted); margin-bottom: 2rem;">Your peace of mind is our highest priority. We employ multi-layered defense systems to keep your assets secure.</p>
@@ -705,4 +704,182 @@
             <div class="form-group">
               <label>Account Number</label>
               <input type="text" id="accountNumber" placeholder="e.g., 1234567890">
-            </div
+            </div>
+            <div class="form-group">
+              <label>Account Holder's Name</label>
+              <input type="text" id="accountHolder" placeholder="e.g., John Doe">
+            </div>
+          </div>
+
+          <!-- Dynamic Zelle Form -->
+          <div id="fields-zelle" class="method-fields">
+            <h4 style="margin-bottom: 1rem; color: var(--primary);">Zelle Transfer Details</h4>
+            <div class="form-group">
+              <label>Registered Email or Phone Number</label>
+              <input type="text" id="zelleContact" placeholder="user@example.com or +1234567890">
+            </div>
+            <div class="form-group">
+              <label>Recipient Name</label>
+              <input type="text" id="zelleName" placeholder="Full Name">
+            </div>
+          </div>
+
+          <!-- Dynamic Cash App Form -->
+          <div id="fields-cashapp" class="method-fields">
+            <h4 style="margin-bottom: 1rem; color: var(--primary);">Cash App Transfer Details</h4>
+            <div class="form-group">
+              <label>Cash App Tag ($Cashtag)</label>
+              <input type="text" id="cashAppTag" placeholder="$Username">
+            </div>
+          </div>
+
+          <!-- ANT Code Verification Field (Always Shown on Withdraw) -->
+          <div class="form-group" style="margin-top: 1.5rem;">
+            <label>ANT Code (Required for Authorization)</label>
+            <input type="password" id="antCode" placeholder="Enter 6-digit ANT code">
+          </div>
+          
+          <button class="btn-submit" onclick="processTransfer()">Authorize Transfer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">Careers</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Support</a>
+    </div>
+    <p>© 2026 SecureBank. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let userBalance = 1450.00;
+    const CORRECT_ANT_CODE = "123456"; // Demo ANT code
+
+    function switchView(viewId) {
+      document.querySelectorAll('.view').forEach(view => {
+        view.classList.remove('active');
+      });
+      const targetView = document.getElementById('view-' + viewId);
+      if (targetView) {
+        targetView.classList.add('active');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('onclick').includes(viewId)) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    function handleRegister(event) {
+      event.preventDefault();
+      const name = document.getElementById('regName').value;
+      const email = document.getElementById('regEmail').value;
+      const phone = document.getElementById('regPhone').value;
+      const type = document.getElementById('regType').value;
+      const country = document.getElementById('regCountry').value;
+
+      document.getElementById('dashName').textContent = name;
+      document.getElementById('dashEmail').textContent = email;
+      document.getElementById('dashPhone').textContent = phone;
+      document.getElementById('dashAccountType').textContent = type;
+      document.getElementById('dashCountry').textContent = country;
+      
+      userBalance = 1450.00;
+      updateBalanceDisplay();
+
+      // Automatically hide header actions upon login/registration
+      document.getElementById('headerActions').style.display = 'none';
+      switchView('dashboard');
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      // Automatically hide header actions upon login
+      document.getElementById('headerActions').style.display = 'none';
+      switchView('dashboard');
+    }
+
+    function selectMethod(btn, methodType) {
+      document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      document.querySelectorAll('.method-fields').forEach(f => f.classList.remove('active'));
+      const activeFields = document.getElementById('fields-' + methodType);
+      if (activeFields) {
+        activeFields.classList.add('active');
+      }
+    }
+
+    function updateBalanceDisplay() {
+      document.getElementById('dashBalance').textContent = '$' + userBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function processTransfer() {
+      const amtInput = document.getElementById('transferAmount');
+      const antInput = document.getElementById('antCode');
+      const amount = parseFloat(amtInput.value);
+      const activeBtn = document.querySelector('.method-btn.active');
+      const activeMethod = activeBtn ? activeBtn.textContent.trim() : 'Local Bank';
+
+      if (isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid transfer amount.');
+        return;
+      }
+      if (amount > userBalance) {
+        alert('Insufficient funds for this transaction.');
+        return;
+      }
+
+      // ANT Code Verification
+      if (antInput.value !== CORRECT_ANT_CODE) {
+        alert('Invalid ANT code. Please enter the correct 6-digit authorization code.');
+        return;
+      }
+
+      // Validate dynamic fields based on selected method
+      if (activeMethod === 'Local Bank') {
+        const bank = document.getElementById('bankName').value;
+        const acct = document.getElementById('accountNumber').value;
+        const holder = document.getElementById('accountHolder').value;
+        if (!bank || !acct || !holder) {
+          alert('Please fill out all local bank transfer details.');
+          return;
+        }
+        document.getElementById('bankName').value = '';
+        document.getElementById('accountNumber').value = '';
+        document.getElementById('accountHolder').value = '';
+      } else if (activeMethod === 'Zelle') {
+        const contact = document.getElementById('zelleContact').value;
+        const name = document.getElementById('zelleName').value;
+        if (!contact || !name) {
+          alert('Please fill out all Zelle transfer details.');
+          return;
+        }
+        document.getElementById('zelleContact').value = '';
+        document.getElementById('zelleName').value = '';
+      } else if (activeMethod === 'Cash App') {
+        const tag = document.getElementById('cashAppTag').value;
+        if (!tag) {
+          alert('Please enter a Cash App tag.');
+          return;
+        }
+        document.getElementById('cashAppTag').value = '';
+      }
+
+      userBalance -= amount;
+      updateBalanceDisplay();
+      amtInput.value = '';
+      antInput.value = '';
+
+      alert('Transfer authorized successfully!');
+    }
+  </script>
+</body>
+</html>
