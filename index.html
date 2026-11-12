@@ -137,7 +137,7 @@
       background: var(--accent-hover);
     }
 
-    /* Security & About Section */
+    /* Security Section */
     .security-section {
       padding: 5rem 5%;
       background: var(--surface);
@@ -179,6 +179,38 @@
     .security-card p {
       color: var(--text-muted);
       line-height: 1.6;
+    }
+
+    /* Dynamic Gallery Section */
+    .gallery-section {
+      padding: 5rem 5%;
+      background: var(--bg);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .gallery-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      height: 350px;
+      position: relative;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.05);
     }
 
     /* Auth Forms */
@@ -288,13 +320,22 @@
       background: #dc2626;
     }
 
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 992px) {
+      .content-grid { grid-template-columns: 1fr; }
+    }
+
     .balance-card {
       background: linear-gradient(135deg, var(--accent), var(--accent-hover));
       color: white;
       padding: 2.5rem;
       border-radius: var(--radius);
       margin-bottom: 2rem;
-      max-width: 450px;
     }
 
     .balance-card h3 {
@@ -311,8 +352,9 @@
 
     .details-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     .detail-card {
@@ -330,8 +372,41 @@
     }
 
     .detail-card p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 600;
+    }
+
+    /* Transfer/Withdraw Section */
+    .transfer-panel {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .transfer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .transfer-option {
+      padding: 1rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+      background: var(--bg);
+    }
+
+    .transfer-option:hover, .transfer-option.selected {
+      border-color: var(--accent);
+      background: #eff6ff;
+      color: var(--accent);
     }
 
     .email-modal {
@@ -358,6 +433,7 @@
       .form-row { grid-template-columns: 1fr; }
       .form-group.full-width { grid-column: span 1; }
       .hero h1 { font-size: 3rem; }
+      .balance-amount { font-size: 2.5rem; }
     }
   </style>
 </head>
@@ -395,6 +471,23 @@
           <div class="security-card">
             <h3>24/7 Fraud Monitoring</h3>
             <p>Our intelligent security systems actively monitor your account around the clock to detect and prevent unauthorized activity.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <div class="section-container">
+        <h2 class="section-title">Empowering Your Financial Journey</h2>
+        <div class="gallery-grid">
+          <div class="gallery-card">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team Collaborating">
+          </div>
+          <div class="gallery-card">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Working on Laptop">
+          </div>
+          <div class="gallery-card">
+            <img src="https://images.unsplash.com/photo-1556742049-0a6245d1feaa?auto=format&fit=crop&w=800&q=80" alt="Celebrating Success">
           </div>
         </div>
       </div>
@@ -454,7 +547,7 @@
             </div>
           </div>
 
-          <button type="submit" class="submit-btn">Initialize Account</button>
+          <button type="submit" class="submit-btn>Initialize Account</button>
         </form>
       </div>
     </div>
@@ -471,29 +564,54 @@
         <button class="logout-btn" onclick="switchView('landing')">Log Out</button>
       </div>
 
-      <div class="balance-card">
-        <h3>Total Available Balance</h3>
-        <div class="balance-amount" id="dash-balance">$0.00</div>
-        <p>Instant Liquidity Ready</p>
-      </div>
+      <div class="content-grid">
+        <div>
+          <div class="balance-card">
+            <h3>Total Available Balance</h3>
+            <div class="balance-amount" id="dash-balance">$0.00</div>
+            <p>Instant Liquidity Ready</p>
+          </div>
 
-      <h3>Account Overview</h3>
-      <div class="details-grid" style="margin-top: 1rem;">
-        <div class="detail-card">
-          <h4>Account Type</h4>
-          <p id="dash-acct-type">-</p>
+          <h3>Account Overview</h3>
+          <div class="details-grid" style="margin-top: 1rem;">
+            <div class="detail-card">
+              <h4>Account Type</h4>
+              <p id="dash-acct-type">-</p>
+            </div>
+            <div class="detail-card">
+              <h4>Email Address</h4>
+              <p id="dash-email">-</p>
+            </div>
+            <div class="detail-card">
+              <h4>Phone Number</h4>
+              <p id="dash-phone">-</p>
+            </div>
+            <div class="detail-card">
+              <h4>Country</h4>
+              <p id="dash-country">-</p>
+            </div>
+          </div>
         </div>
-        <div class="detail-card">
-          <h4>Email Address</h4>
-          <p id="dash-email">-</p>
-        </div>
-        <div class="detail-card">
-          <h4>Phone Number</h4>
-          <p id="dash-phone">-</p>
-        </div>
-        <div class="detail-card">
-          <h4>Country</h4>
-          <p id="dash-country">-</p>
+
+        <div>
+          <div class="transfer-panel">
+            <h3>Transfer & Withdrawal Options</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Select a payout method to disburse funds:</p>
+            
+            <div class="transfer-grid">
+              <div class="transfer-option" onclick="selectTransferMethod(this)">Local Bank</div>
+              <div class="transfer-option" onclick="selectTransferMethod(this)">Wire Transfer</div>
+              <div class="transfer-option" onclick="selectTransferMethod(this)">Zelle</div>
+              <div class="transfer-option" onclick="selectTransferMethod(this)">Cash App</div>
+              <div class="transfer-option" onclick="selectTransferMethod(this)">Venmo</div>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+              <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Transfer Amount ($)</label>
+              <input type="number" id="transfer-amount" placeholder="0.00" style="width: 100%; padding: 0.8rem; border: 1px solid var(--border); border-radius: 6px; font-size: 1rem;">
+              <button class="submit-btn" onclick="processTransfer()" style="margin-top: 1rem;">Authorize Transfer</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -501,14 +619,15 @@
 
   <!-- Email Simulation Modal -->
   <div id="email-modal" class="email-modal">
-    <div style="font-weight: bold; margin-bottom: 0.5rem;">✉️ Welcome Email Triggered</div>
-    <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem;">Subject: Welcome to EB Bank!</div>
+    <div style="font-weight: bold; margin-bottom: 0.5rem;">✉️ Notification Triggered</div>
+    <div id="email-subject" style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem;">Subject: Welcome to EB Bank!</div>
     <div id="email-body" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;"></div>
   </div>
 
   <script>
     const state = {
-      currentUser: null
+      currentUser: null,
+      selectedMethod: null
     };
 
     window.switchView = function(viewName) {
@@ -533,41 +652,52 @@
       regForm.onsubmit = function(e) {
         e.preventDefault();
         const name = document.getElementById('reg-name').value;
+        const name = document.getElementById('reg-name').value;
         const email = document.getElementById('reg-email').value;
         const phone = document.getElementById('reg-phone').value;
         const acctType = document.getElementById('reg-acct-type').value;
         const address = document.getElementById('reg-address').value;
         const country = document.getElementById('reg-country').value;
 
-        state.currentUser = { name, email, phone, acctType, address, country, balance: 0.00 };
+        // Defaulting to a starting balance for demonstration purposes so withdrawal can be tested
+        state.currentUser = { name, email, phone, acctType, address, country, balance: 1550.00 };
 
-        triggerEmail(email, `Dear ${name},<br><br>Welcome to EB Bank! Your ${acctType} account has been initialized successfully. Your starting balance is $0.00.<br><br>Best regards,<br>EB Bank Team`);
+        triggerEmail(email, "Account Initialized", `Dear ${name},<br><br>Welcome to EB Bank! Your ${acctType} account has been successfully verified and initialized.<br><br>Best regards,<br>EB Bank Team`);
         updateDashboard();
         window.switchView('dashboard');
       };
     }
 
-    function triggerEmail(email, body) {
-      const emailBody = document.getElementById('email-body');
-      if (!emailBody) return;
-      emailBody.innerHTML = `<strong>To:</strong> ${email}<br><br>${body}`;
-      const modal = document.getElementById('email-modal');
-      if (modal) {
-        modal.style.display = 'block';
-        setTimeout(() => { modal.style.display = 'none'; }, 8000);
+    window.selectTransferMethod = function(element) {
+      document.querySelectorAll('.transfer-option').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+      state.selectedMethod = element.textContent;
+    };
+
+    window.processTransfer = function() {
+      const amtInput = document.getElementById('transfer-amount');
+      const amount = parseFloat(amtInput.value);
+
+      if (!state.selectedMethod) {
+        alert('Please select a transfer method.');
+        return;
       }
-    }
 
-    function updateDashboard() {
-      if (!state.currentUser) return;
-      document.getElementById('dash-user-name').textContent = `Welcome Back, ${state.currentUser.name}`;
+      if (isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid transfer amount.');
+        return;
+      }
+
+      if (state.currentUser.balance < amount) {
+        alert('Insufficient funds for this transaction.');
+        return;
+      }
+
+      state.currentUser.balance -= amount;
       document.getElementById('dash-balance').textContent = `$${state.currentUser.balance.toFixed(2)}`;
-      document.getElementById('dash-acct-type').textContent = `${state.currentUser.acctType} Account`;
-      document.getElementById('dash-email').textContent = state.currentUser.email;
-      document.getElementById('dash-phone').textContent = state.currentUser.phone;
-      document.getElementById('dash-country').textContent = state.currentUser.country;
-    }
-  </script>
-</body>
-</html>
+      amtInput.value = '';
+      
+      triggerEmail(state.currentUser.email, "Transfer Authorized", `Your transfer request of $${amount.toFixed(2)} via ${state.selectedMethod} has been processed successfully.`);
+    };
 
+    function triggerEmail(email, subje
