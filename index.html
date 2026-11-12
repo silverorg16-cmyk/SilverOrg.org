@@ -1,747 +1,708 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SecureBank — Simple Finances, Empowered Future</title>
-<style>
-:root {
---primary: #0f172a;
---secondary: #0ea5e9;
---text: #0f172a;
---text-muted: #64748b;
---bg: #f8fafc;
---surface: #ffffff;
---border: #e2e8f0;
---radius: 12px;
-}
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-body {
-background-color: var(--bg);
-color: var(--text);
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-}
-header {
-background: var(--surface);
-border-bottom: 1px solid var(--border);
-padding: 1rem 5%;
-display: flex;
-justify-content: space-between;
-align-items: center;
-position: sticky;
-top: 0;
-z-index: 1000;
-}
-.logo {
-font-size: 1.25rem;
-font-weight: 700;
-color: var(--primary);
-display: flex;
-align-items: center;
-gap: 0.5rem;
-cursor: pointer;
-}
-.logo-icon {
-width: 28px;
-height: 28px;
-background: var(--secondary);
-border-radius: 6px;
-display: flex;
-align-items: center;
-justify-content: center;
-color: white;
-font-weight: bold;
-}
-.nav-links {
-display: flex;
-gap: 2rem;
-align-items: center;
-}
-.nav-links a {
-color: var(--text-muted);
-text-decoration: none;
-font-weight: 500;
-font-size: 0.9rem;
-}
-.nav-links a.active {
-color: var(--primary);
-}
-.header-actions {
-display: flex;
-gap: 1rem;
-align-items: center;
-}
-.btn {
-padding: 0.6rem 1.2rem;
-border-radius: 6px;
-font-weight: 600;
-font-size: 0.9rem;
-cursor: pointer;
-border: none;
-text-decoration: none;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-}
-.btn-primary {
-background: var(--secondary);
-color: white;
-}
-.btn-outline {
-background: transparent;
-color: var(--primary);
-border: 1px solid var(--border);
-}
-.view {
-display: none;
-flex: 1;
-}
-.view.active {
-display: block;
-}
-/* Hero Section */
-.hero {
-display: grid;
-grid-template-columns: 1fr 1fr;
-align-items: center;
-padding: 5rem 5%;
-max-width: 1400px;
-margin: 0 auto;
-gap: 4rem;
-}
-@media (max-width: 768px) {
-.hero { grid-template-columns: 1fr; padding: 3rem 5%; text-align: center; }
-.hero-image { order: -1; }
-.nav-links { display: none; }
-}
-.hero-content h1 {
-font-size: 3.5rem;
-font-weight: 800;
-line-height: 1.1;
-margin-bottom: 1.5rem;
-color: var(--primary);
-}
-.hero-content p {
-font-size: 1.1rem;
-color: var(--text-muted);
-margin-bottom: 2.5rem;
-line-height: 1.5;
-}
-.hero-image {
-border-radius: 20px;
-overflow: hidden;
-box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
-height: 450px;
-}
-.hero-image img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-}
-/* Features Grid */
-.features-section {
-padding: 5rem 5%;
-background: var(--surface);
-border-top: 1px solid var(--border);
-border-bottom: 1px solid var(--border);
-}
-.section-header {
-text-align: center;
-max-width: 600px;
-margin: 0 auto 3rem;
-}
-.section-header h2 {
-font-size: 2.5rem;
-margin-bottom: 1rem;
-color: var(--primary);
-}
-.features-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-gap: 2rem;
-max-width: 1200px;
-margin: 0 auto;
-}
-.feature-card {
-padding: 2rem;
-text-align: center;
-}
-.feature-icon {
-width: 48px;
-height: 48px;
-background: #e0f2fe;
-color: #0284c7;
-border-radius: 12px;
-display: flex;
-align-items: center;
-justify-content: center;
-margin: 0 auto 1.5rem;
-font-size: 1.5rem;
-}
-.feature-card h3 {
-font-size: 1.25rem;
-margin-bottom: 0.5rem;
-color: var(--primary);
-}
-.feature-card p {
-color: var(--text-muted);
-font-size: 0.95rem;
-line-height: 1.5;
-}
-/* Security Section */
-.security-section {
-padding: 5rem 5%;
-max-width: 1200px;
-margin: 0 auto;
-display: grid;
-grid-template-columns: 1fr 1fr;
-align-items: center;
-gap: 4rem;
-}
-@media (max-width: 768px) {
-.security-section { grid-template-columns: 1fr; }
-}
-.security-content h2 {
-font-size: 2.5rem;
-margin-bottom: 1.5rem;
-color: var(--primary);
-}
-.security-list {
-list-style: none;
-margin-bottom: 2rem;
-}
-.security-list li {
-position: relative;
-padding-left: 2rem;
-margin-bottom: 1rem;
-color: var(--text-muted);
-}
-.security-list li::before {
-content: "✓";
-position: absolute;
-left: 0;
-color: #16a34a;
-font-weight: bold;
-}
-.security-visual {
-background: #f1f5f9;
-padding: 3rem;
-border-radius: 20px;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 1.5rem;
-border: 1px dashed #cbd5e1;
-}
-.lock-icon {
-font-size: 5rem;
-color: #64748b;
-}
-/* Gallery Section */
-.gallery-section {
-padding: 5rem 5%;
-background: #f1f5f9;
-}
-.gallery-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-gap: 1.5rem;
-max-width: 1200px;
-margin: 0 auto;
-}
-.gallery-item {
-border-radius: 16px;
-overflow: hidden;
-height: 300px;
-box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-}
-.gallery-item img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-}
-/* Auth Modal / View */
-.auth-container {
-max-width: 500px;
-margin: 3rem auto;
-padding: 2.5rem;
-background: var(--surface);
-border-radius: 16px;
-box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-}
-.auth-header {
-margin-bottom: 2rem;
-}
-.auth-header h2 {
-font-size: 2rem;
-margin-bottom: 0.5rem;
-color: var(--primary);
-}
-.form-group {
-margin-bottom: 1.5rem;
-}
-.form-row {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 1rem;
-}
-.form-group label {
-display: block;
-font-size: 0.9rem;
-font-weight: 600;
-margin-bottom: 0.5rem;
-color: var(--primary);
-}
-.form-group input, .form-group select {
-width: 100%;
-padding: 0.75rem;
-border: 1px solid var(--border);
-border-radius: 8px;
-font-size: 1rem;
-}
-.form-group input:focus, .form-group select:focus {
-outline: none;
-border-color: var(--secondary);
-}
-.btn-submit {
-width: 100%;
-padding: 1rem;
-background: var(--secondary);
-color: white;
-border: none;
-border-radius: 8px;
-font-size: 1.1rem;
-font-weight: 600;
-cursor: pointer;
-}
-/* Dashboard View */
-.dashboard-layout {
-max-width: 1200px;
-margin: 2rem auto;
-padding: 0 5%;
-display: grid;
-grid-template-columns: 2fr 1fr;
-gap: 2rem;
-}
-@media (max-width: 992px) {
-.dashboard-layout { grid-template-columns: 1fr; }
-}
-.balance-card {
-background: linear-gradient(135deg, #0284c7, #0369a1);
-color: white;
-padding: 2.5rem;
-border-radius: 20px;
-margin-bottom: 2rem;
-}
-.balance-card h3 {
-font-weight: 400;
-opacity: 0.9;
-margin-bottom: 0.5rem;
-}
-.balance-amount {
-font-size: 3rem;
-font-weight: 800;
-}
-.transfer-panel {
-background: var(--surface);
-padding: 2rem;
-border-radius: 16px;
-border: 1px solid var(--border);
-}
-.methods-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-gap: 0.75rem;
-margin: 1.5rem 0;
-}
-.method-btn {
-padding: 0.75rem;
-border: 1px solid var(--border);
-border-radius: 8px;
-background: var(--bg);
-text-align: center;
-font-size: 0.85rem;
-font-weight: 600;
-cursor: pointer;
-transition: all 0.2s;
-}
-.method-btn.active {
-border-color: var(--secondary);
-background: #e0f2fe;
-color: #0369a1;
-}
-/* Dynamic Withdrawal Forms */
-.method-fields {
-display: none;
-margin-top: 1.5rem;
-padding-top: 1.5rem;
-border-top: 1px dashed var(--border);
-}
-.method-fields.active {
-display: block;
-}
-footer {
-text-align: center;
-padding: 3rem;
-color: var(--text-muted);
-font-size: 0.9rem;
-border-top: 1px solid var(--border);
-margin-top: auto;
-}
-.footer-links {
-display: flex;
-justify-content: center;
-gap: 2rem;
-margin-bottom: 1rem;
-}
-.footer-links a {
-color: var(--text-muted);
-text-decoration: none;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureBank — Simple Finances, Empowered Future</title>
+  <style>
+    :root {
+      --primary: #0f172a;
+      --secondary: #0ea5e9;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--secondary);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a.active {
+      color: var(--primary);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+
+    .view {
+      display: none;
+      flex: 1;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 5rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 3rem 5%; text-align: center; }
+      .hero-image { order: -1; }
+      .nav-links { display: none; }
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+
+    .hero-image {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      height: 450px;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Features Grid */
+    .features-section {
+      padding: 5rem 5%;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: #e0f2fe;
+      color: #0284c7;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Security Section */
+    .security-section {
+      padding: 5rem 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      .security-section { grid-template-columns: 1fr; }
+    }
+
+    .security-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    .security-list {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .security-list li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1rem;
+      color: var(--text-muted);
+    }
+
+    .security-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    .security-visual {
+      background: #f1f5f9;
+      padding: 3rem;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      border: 1px dashed #cbd5e1;
+    }
+
+    .lock-icon {
+      font-size: 5rem;
+      color: #64748b;
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      padding: 5rem 5%;
+      background: #f1f5f9;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      border-radius: 16px;
+      overflow: hidden;
+      height: 300px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Auth Modal / View */
+    .auth-container {
+      max-width: 500px;
+      margin: 3rem auto;
+      padding: 2.5rem;
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    .auth-header {
+      margin-bottom: 2rem;
+    }
+
+    .auth-header h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--secondary);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Dashboard View */
+    .dashboard-layout {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 992px) {
+      .dashboard-layout { grid-template-columns: 1fr; }
+    }
+
+    .balance-card {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+    }
+
+    .balance-card h3 {
+      font-weight: 400;
+      opacity: 0.9;
+      margin-bottom: 0.5rem;
+    }
+
+    .balance-amount {
+      font-size: 3rem;
+      font-weight: 800;
+    }
+
+    .transfer-panel {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .methods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+
+    .method-btn {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .method-btn.active {
+      border-color: var(--secondary);
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    /* Dynamic Withdrawal Forms */
+    .method-fields {
+      display: none;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed var(--border);
+    }
+    
+    .method-fields.active {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-<header>
-<div class="logo" onclick="switchView('home')">
-<div class="logo-icon">S</div>
-<span>SecureBank</span>
-</div>
-<div class="nav-links">
-<a href="#" class="active" onclick="switchView('home')">Personal</a>
-<a href="#" onclick="switchView('home')">Business</a>
-<a href="#" onclick="switchView('home')">Wealth</a>
-<a href="#" onclick="switchView('home')">About Us</a>
-</div>
-<div class="header-actions" id="headerActions">
-<button class="btn btn-outline" onclick="switchView('login')">Log In</button>
-<button class="btn btn-primary" onclick="switchView('register')">Open Account</button>
-</div>
-</header>
-<!-- VIEW 1: Home / Landing -->
-<div id="view-home" class="view active">
-<section class="hero">
-<div class="hero-content">
-<h1>Simplify Your Finances.
-Empower Your Future.</h1>
-<p>Experience the next generation of digital banking. Secure, intuitive, and designed to help your money grow effortlessly.</p>
-<div>
-<button class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;" onclick="switchView('register')">Get Started</button>
-</div>
-</div>
-<div class="hero-image">
-<img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Person using banking app">
-</div>
-</section>
-<section class="features-section">
-<div class="section-header">
-<h2>Why Choose Us?</h2>
-<p>Everything you need to manage your money with confidence.</p>
-</div>
-<div class="features-grid">
-<div class="feature-card">
-<div class="feature-icon">🔒</div>
-<h3>Online Security</h3>
-<p>Bank safely with state-of-the-art encryption and fraud monitoring.</p>
-</div>
-<div class="feature-card">
-<div class="feature-icon">📈</div>
-<h3>Competitive Rates</h3>
-<p>Make your savings work harder with industry-leading interest rates.</p>
-</div>
-<div class="feature-card">
-<div class="feature-icon">🎧</div>
-<h3>24/7 Support</h3>
-<p>Our dedicated team is always here to help you, day or night.</p>
-</div>
-<div class="feature-card">
-<div class="feature-icon">⚡</div>
-<h3>Easy Transfers</h3>
-<p>Move money globally in seconds with just a few taps.</p>
-</div>
-</div>
-</section>
-<section class="security-section">
-<div class="security-content">
-<h2>Security & Trust</h2>
-<p style="color: var(--text-muted); margin-bottom: 2rem;">Your peace of mind is our highest priority. We employ multi-layered defense systems to keep your assets secure.</p>
-<ul class="security-list">
-<li>FDIC insurance coverage up to applicable limits</li>
-<li>Multi-factor authentication for all account access</li>
-<li>Real-time transaction alerts and monitoring</li>
-</ul>
-<button class="btn btn-outline">Learn More About Security</button>
-</div>
-<div class="security-visual">
-<div class="lock-icon">🔒</div>
-<h3 style="color: var(--primary);">Bank-Grade Protection</h3>
-<p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Your data is protected by 256-bit SSL encryption.</p>
-</div>
-</section>
-<section class="gallery-section">
-<div class="section-header">
-<h2>Life & Success at SecureBank</h2>
-<p>Empowering your everyday success.</p>
-</div>
-<div class="gallery-grid">
-<div class="gallery-item">
-<img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team collaborating">
-</div>
-<div class="gallery-item">
-<img src="https://images.unsplash.com/photo-1556742049-0a6245d1feaa?auto=format&fit=crop&w=800&q=80" alt="Happy customers celebrating">
-</div>
-<div class="gallery-item">
-<img src="https://images.unsplash.com/photo-1600880292203-757bb62b0b12?auto=format&fit=crop&w=800&q=80" alt="Planning financial future">
-</div>
-</div>
-</section>
-</div>
-<!-- VIEW 2: Registration -->
-<div id="view-register" class="view">
-<div class="auth-container">
-<div class="auth-header">
-<h2>Create Your Account</h2>
-<p style="color: var(--text-muted);">Enter your details to get started with SecureBank.</p>
-</div>
-<form id="registrationForm" onsubmit="handleRegister(event)">
-<div class="form-group">
-<label>Full Legal Name</label>
-<input type="text" id="regName" required placeholder="John Doe">
-</div>
-<div class="form-row">
-<div class="form-group">
-<label>Email Address</label>
-<input type="email" id="regEmail" required placeholder="john@example.com">
-</div>
-<div class="form-group">
-<label>Phone Number</label>
-<input type="tel" id="regPhone" required placeholder="+1 234 567 8900">
-</div>
-</div>
-<div class="form-row">
-<div class="form-group">
-<label>Account Type</label>
-<select id="regType">
-<option value="Savings">Savings Account</option>
-<option value="Checking">Checking Account</option>
-</select>
-</div>
-<div class="form-group">
-<label>Country</label>
-<select id="regCountry">
-<option value="United States">United States</option>
-<option value="United Kingdom">United Kingdom</option>
-<option value="Canada">Canada</option>
-<option value="Global">Other</option>
-</select>
-</div>
-</div>
-<div class="form-group">
-<label>Residential Address</label>
-<input type="text" id="regAddress" required placeholder="123 Main St, Apt 4B">
-</div>
-<div class="form-group">
-<label>Government ID Upload</label>
-<input type="file" required accept="image/*">
-</div>
-<button type="submit" class="btn-submit">Complete Registration</button>
-</form>
-</div>
-</div>
-<!-- VIEW 3: Login -->
-<div id="view-login" class="view">
-<div class="auth-container">
-<div class="auth-header">
-<h2>Welcome Back</h2>
-<p style="color: var(--text-muted);">Access your SecureBank account.</p>
-</div>
-<form onsubmit="handleLogin(event)">
-<div class="form-group">
-<label>Email Address</label>
-<input type="email" required placeholder="john@example.com">
-</div>
-<div class="form-group">
-<label>Password</label>
-<input type="password" required placeholder="••••••••">
-</div>
-<button type="submit" class="btn-submit">Log In</button>
-</form>
-</div>
-</div>
-<!-- VIEW 4: Dashboard -->
-<div id="view-dashboard" class="view">
-<div class="dashboard-layout">
-<div>
-<div class="balance-card">
-<h3>Total Available Balance</h3>
-<div class="balance-amount" id="dashBalance">$1,450.00</div>
-<p style="margin-top: 1rem; opacity: 0.9;">Account Type: <span id="dashAccountType" style="font-weight: bold;">Savings</span></p>
-</div>
-<div style="background: var(--surface); padding: 2rem; border-radius: 16px; border: 1px solid var(--border);">
-<h3>Account Overview</h3>
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
-<div>
-<p style="color: var(--text-muted); font-size: 0.85rem;">Account Holder</p>
-<p style="font-weight: 600; margin-top: 0.25rem;" id="dashName">John Doe</p>
-</div>
-<div>
-<p style="color: var(--text-muted); font-size: 0.85rem;">Email</p>
-<p style="font-weight: 600; margin-top: 0.25rem;" id="dashEmail">john@example.com</p>
-</div>
-<div>
-<p style="color: var(--text-muted); font-size: 0.85rem;">Phone</p>
-<p style="font-weight: 600; margin-top: 0.25rem;" id="dashPhone">+1 234 567 8900</p>
-</div>
-<div>
-<p style="color: var(--text-muted); font-size: 0.85rem;">Country</p>
-<p style="font-weight: 600; margin-top: 0.25rem;" id="dashCountry">United States</p>
-</div>
-</div>
-</div>
-</div>
-<div>
-<div class="transfer-panel">
-<h3>Transfer & Withdraw</h3>
-<p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">Select payout method:</p>
-<div class="methods-grid">
-<button type="button" class="method-btn active" onclick="selectMethod(this, 'local')">Local Bank</button>
-<button type="button" class="method-btn" onclick="selectMethod(this, 'zelle')">Zelle</button>
-<button type="button" class="method-btn" onclick="selectMethod(this, 'cashapp')">Cash App</button>
-<button type="button" class="method-btn" onclick="selectMethod(this, 'wire')">Wire</button>
-<button type="button" class="method-btn" onclick="selectMethod(this, 'venmo')">Venmo</button>
-</div>
-<div class="form-group" style="margin-top: 1.5rem;">
-<label>Amount (USD)</label>
-<input type="number" id="transferAmount" placeholder="0.00" style="font-size: 1.2rem; font-weight: bold;">
-</div>
-<!-- Dynamic Local Bank Transfer Form -->
-<div id="fields-local" class="method-fields active">
-<h4 style="margin-bottom: 1rem; color: var(--primary);">Local Bank Transfer Details</h4>
-<div class="form-group">
-<label>Bank Name</label>
-<input type="text" id="bankName" placeholder="e.g., Chase Bank">
-</div>
-<div class="form-group">
-<label>Account Number</label>
-<input type="text" id="accountNumber" placeholder="e.g., 1234567890">
-</div>
-<div class="form-group">
-<label>Account Holder's Name</label>
-<input type="text" id="accountHolder" placeholder="e.g., John Doe">
-</div>
-</div>
-<!-- Dynamic Zelle Form -->
-<div id="fields-zelle" class="method-fields">
-<h4 style="margin-bottom: 1rem; color: var(--primary);">Zelle Transfer Details</h4>
-<div class="form-group">
-<label>Registered Email or Phone Number</label>
-<input type="text" id="zelleContact" placeholder="user@example.com or +1234567890">
-</div>
-<div class="form-group">
-<label>Recipient Name</label>
-<input type="text" id="zelleName" placeholder="Full Name">
-</div>
-</div>
-<!-- Dynamic Cash App Form -->
-<div id="fields-cashapp" class="method-fields">
-<h4 style="margin-bottom: 1rem; color: var(--primary);">Cash App Transfer Details</h4>
-<div class="form-group">
-<label>Cash App Tag ($Cashtag)</label>
-<input type="text" id="cashAppTag" placeholder="$Username">
-</div>
-</div>
-<!-- ANT Code Verification Field (Always Shown on Withdraw) -->
-<div class="form-group" style="margin-top: 1.5rem;">
-<label>ANT Code (Required for Authorization)</label>
-<input type="password" id="antCode" placeholder="Enter 6-digit ANT code">
-</div>
-<button class="btn-submit" onclick="processTransfer()">Authorize Transfer</button>
-</div>
-</div>
-</div>
-</div>
-<footer>
-<div class="footer-links">
-<a href="#">Careers</a>
-<a href="#">Privacy Policy</a>
-<a href="#">Terms of Service</a>
-<a href="#">Contact Support</a>
-</div>
-<p>© 2026 SecureBank. All rights reserved.</p>
-</footer>
-<script>
-let userBalance = 1450.00;
-const CORRECT_ANT_CODE = "123456"; // Demo ANT code
-function switchView(viewId) {
-document.querySelectorAll('.view').forEach(view => {
-view.classList.remove('active');
-});
-const targetView = document.getElementById('view-' + viewId);
-if (targetView) {
-targetView.classList.add('active');
-}
-window.scrollTo({ top: 0, behavior: 'smooth' });
-document.querySelectorAll('.nav-links a').forEach(link => {
-link.classList.remove('active');
-if (link.getAttribute('onclick').includes(viewId)) {
-link.classList.add('active');
-}
-});
-}
-function handleRegister(event) {
-event.preventDefault();
-const name = document.getElementById('regName').value;
-const email = document.getElementById('regEmail').value;
-const phone = document.getElementById('regPhone').value;
-const type = document.getElementById('regType').value;
-const country = document.getElementById('regCountry').value;
-document.getElementById('dashName').textContent = name;
-document.getElementById('dashEmail').textContent = email;
-document.getElementById('dashPhone').textContent = phone;
-document.getElementById('dashAccountType').textContent = type;
-document.getElementById('dashCountry').textContent = country;
-userBalance = 1450.00;
-updateBalanceDisplay();
-// Automatically hide header actions upon login/registration
-document.getElementById('headerActions').style.display = 'none';
-switchView('dashboard');
-}
-function handleLogin(event) {
-event.preventDefault();
-// Automatically hide header actions upon login
-document.getElementById('headerActions').style.display = 'none';
-switchView('dashboard');
-}
-function selectMethod(btn, methodType) {
-document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
-btn.classList.add('active');
-document.querySelectorAll('.method-fields').forEach(f => f.classList.remove('active'));
-const activeFields = document.getElementById('fields-' + methodType);
-if (activeFields) {
-activeFields.classList.add('active');
-}
-}
-function updateBalanceDisplay() {
-document.getElementById('dashBalance').textContent = '$' + userBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-function processTransfer() {
-const amtInput = document.getElementById('transferAmount');
-const antInput = document.getElementById('antCode');
-const amount = parseFloat(amtInput.value);
-const activeBtn = document.querySelector('.method-btn.active');
-const activeMethod = activeBtn ? activeBtn.textContent.trim() : 'Local Bank';
-if (isNaN(amount) || amount <= 0) {
-alert('Please enter a valid transfer amount.');
-return;
-}
-if (amount > userBalance) {
-alert('Insufficient funds for this transaction.');
-return;
-}
-// ANT Code Verificati
+
+  <header>
+    <div class="logo" onclick="switchView('home')">
+      <div class="logo-icon">S</div>
+      <span>SecureBank</span>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active" onclick="switchView('home')">Personal</a>
+      <a href="#" onclick="switchView('home')">Business</a>
+      <a href="#" onclick="switchView('home')">Wealth</a>
+      <a href="#" onclick="switchView('home')">About Us</a>
+    </div>
+    <div class="header-actions" id="headerActions">
+      <button class="btn btn-outline" onclick="switchView('login')">Log In</button>
+      <button class="btn btn-primary" onclick="switchView('register')">Open Account</button>
+    </div>
+  </header>
+
+  <!-- VIEW 1: Home / Landing -->
+  <div id="view-home" class="view active">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Simplify Your Finances.<br>Empower Your Future.</h1>
+        <p>Experience the next generation of digital banking. Secure, intuitive, and designed to help your money grow effortlessly.</p>
+        <div>
+          <button class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;" onclick="switchView('register')">Get Started</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Person using banking app">
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="section-header">
+        <h2>Why Choose Us?</h2>
+        <p>Everything you need to manage your money with confidence.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Online Security</h3>
+          <p>Bank safely with state-of-the-art encryption and fraud monitoring.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Competitive Rates</h3>
+          <p>Make your savings work harder with industry-leading interest rates.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎧</div>
+          <h3>24/7 Support</h3>
+          <p>Our dedicated team is always here to help you, day or night.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Easy Transfers</h3>
+          <p>Move money globally in seconds with just a few taps.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="security-section">
+      <div class="security-content">
+        <h2>Security & Trust</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">Your peace of mind is our highest priority. We employ multi-layered defense systems to keep your assets secure.</p>
+        <ul class="security-list">
+          <li>FDIC insurance coverage up to applicable limits</li>
+          <li>Multi-factor authentication for all account access</li>
+          <li>Real-time transaction alerts and monitoring</li>
+        </ul>
+        <button class="btn btn-outline">Learn More About Security</button>
+      </div>
+      <div class="security-visual">
+        <div class="lock-icon">🔒</div>
+        <h3 style="color: var(--primary);">Bank-Grade Protection</h3>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Your data is protected by 256-bit SSL encryption.</p>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <div class="section-header">
+        <h2>Life & Success at SecureBank</h2>
+        <p>Empowering your everyday success.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team collaborating">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1556742049-0a6245d1feaa?auto=format&fit=crop&w=800&q=80" alt="Happy customers celebrating">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b0b12?auto=format&fit=crop&w=800&q=80" alt="Planning financial future">
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- VIEW 2: Registration -->
+  <div id="view-register" class="view">
+    <div class="auth-container">
+      <div class="auth-header">
+        <h2>Create Your Account</h2>
+        <p style="color: var(--text-muted);">Enter your details to get started with SecureBank.</p>
+      </div>
+      <form id="registrationForm" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label>Full Legal Name</label>
+          <input type="text" id="regName" required placeholder="John Doe">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="regEmail" required placeholder="john@example.com">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="regPhone" required placeholder="+1 234 567 8900">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Account Type</label>
+            <select id="regType">
+              <option value="Savings">Savings Account</option>
+              <option value="Checking">Checking Account</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Country</label>
+            <select id="regCountry">
+              <option value="United States">United States</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Canada">Canada</option>
+              <option value="Global">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Residential Address</label>
+          <input type="text" id="regAddress" required placeholder="123 Main St, Apt 4B">
+        </div>
+        <div class="form-group">
+          <label>Government ID Upload</label>
+          <input type="file" required accept="image/*">
+        </div>
+        <button type="submit" class="btn-submit">Complete Registration</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- VIEW 3: Login -->
+  <div id="view-login" class="view">
+    <div class="auth-container">
+      <div class="auth-header">
+        <h2>Welcome Back</h2>
+        <p style="color: var(--text-muted);">Access your SecureBank account.</p>
+      </div>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" required placeholder="john@example.com">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-submit">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- VIEW 4: Dashboard -->
+  <div id="view-dashboard" class="view">
+    <div class="dashboard-layout">
+      <div>
+        <div class="balance-card">
+          <h3>Total Available Balance</h3>
+          <div class="balance-amount" id="dashBalance">$1,450.00</div>
+          <p style="margin-top: 1rem; opacity: 0.9;">Account Type: <span id="dashAccountType" style="font-weight: bold;">Savings</span></p>
+        </div>
+
+        <div style="background: var(--surface); padding: 2rem; border-radius: 16px; border: 1px solid var(--border);">
+          <h3>Account Overview</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+            <div>
+              <p style="color: var(--text-muted); font-size: 0.85rem;">Account Holder</p>
+              <p style="font-weight: 600; margin-top: 0.25rem;" id="dashName">John Doe</p>
+            </div>
+            <div>
+              <p style="color: var(--text-muted); font-size: 0.85rem;">Email</p>
+              <p style="font-weight: 600; margin-top: 0.25rem;" id="dashEmail">john@example.com</p>
+            </div>
+            <div>
+              <p style="color: var(--text-muted); font-size: 0.85rem;">Phone</p>
+              <p style="font-weight: 600; margin-top: 0.25rem;" id="dashPhone">+1 234 567 8900</p>
+            </div>
+            <div>
+              <p style="color: var(--text-muted); font-size: 0.85rem;">Country</p>
+              <p style="font-weight: 600; margin-top: 0.25rem;" id="dashCountry">United States</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="transfer-panel">
+          <h3>Transfer & Withdraw</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">Select payout method:</p>
+          
+          <div class="methods-grid">
+            <button type="button" class="method-btn active" onclick="selectMethod(this, 'local')">Local Bank</button>
+            <button type="button" class="method-btn" onclick="selectMethod(this, 'zelle')">Zelle</button>
+            <button type="button" class="method-btn" onclick="selectMethod(this, 'cashapp')">Cash App</button>
+            <button type="button" class="method-btn" onclick="selectMethod(this, 'wire')">Wire</button>
+            <button type="button" class="method-btn" onclick="selectMethod(this, 'venmo')">Venmo</button>
+          </div>
+
+          <div class="form-group" style="margin-top: 1.5rem;">
+            <label>Amount (USD)</label>
+            <input type="number" id="transferAmount" placeholder="0.00" style="font-size: 1.2rem; font-weight: bold;">
+          </div>
+
+          <!-- Dynamic Local Bank Transfer Form -->
+          <div id="fields-local" class="method-fields active">
+            <h4 style="margin-bottom: 1rem; color: var(--primary);">Local Bank Transfer Details</h4>
+            <div class="form-group">
+              <label>Bank Name</label>
+              <input type="text" id="bankName" placeholder="e.g., Chase Bank">
+            </div>
+            <div class="form-group">
+              <label>Account Number</label>
+              <input type="text" id="accountNumber" placeholder="e.g., 1234567890">
+            </div
