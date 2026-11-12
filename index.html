@@ -38,109 +38,126 @@ html>
             font-size: 28px;
             font-weight: bold;
             color: var(--secondary-red);
-            letter-spacing: 1px;
         }
         nav {
             display: flex;
             align-items: center;
         }
         nav a {
-            margin-left: 25px;
+            margin-left: 20px;
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 600;
-            transition: color 0.3s;
         }
-        nav a:hover {
-            color: var(--secondary-red);
-        }
-        .btn-login {
+        .btn-client {
             background-color: var(--secondary-red);
             color: var(--primary-white);
-            padding: 10px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            padding: 8px 16px;
+            border-radius: 4px;
         }
-        .btn-login:hover {
-            background-color: #660000;
+        .btn-admin {
+            background-color: var(--text-dark);
+            color: var(--primary-white);
+            padding: 8px 16px;
+            border-radius: 4px;
         }
         .hero {
+            position: relative;
+            height: 85vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 80px 5%;
-            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1556742049-0a52d6a6d654?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            min-height: 80vh;
+            justify-content: flex-start;
+            padding: 0 10%;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            object-fit: cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.95) 40%, rgba(255,255,255,0.4) 100%);
+            z-index: 2;
         }
         .hero-content {
-            flex: 1;
-            padding-right: 50px;
+            position: relative;
+            z-index: 3;
+            max-width: 600px;
         }
         .hero h1 {
-            font-size: 48px;
+            font-size: 56px;
             color: var(--secondary-red);
+            line-height: 1.1;
             margin-bottom: 20px;
-            line-height: 1.2;
         }
         .hero p {
-            font-size: 18px;
-            color: var(--text-grey);
+            font-size: 20px;
+            color: var(--text-dark);
             margin-bottom: 30px;
+            font-weight: 500;
         }
-        .hero-image {
-            flex: 1;
-            text-align: center;
+        .btn-get-started {
+            display: inline-block;
+            background-color: var(--secondary-red);
+            color: var(--primary-white);
+            padding: 15px 35px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
         }
-        .hero-image img {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-        .features {
-            padding: 80px 5%;
+        .registration-section {
+            padding: 80px 10%;
             background-color: var(--primary-white);
         }
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            color: var(--secondary-red);
-            margin-bottom: 50px;
-        }
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .feature-card {
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
             background-color: var(--bg-light-grey);
-            padding: 30px;
+            padding: 40px;
             border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .btn-submit {
+            width: 100%;
+            background-color: var(--secondary-red);
+            color: var(--primary-white);
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .login-modals {
+            display: none; 
+            padding: 40px 10%;
+            background-color: #eee;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 4px solid var(--secondary-red);
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .feature-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--text-dark);
-        }
-        .feature-card p {
-            color: var(--text-grey);
-        }
-        footer {
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
         }
     </style>
 </head>
@@ -149,45 +166,54 @@ html>
 <header>
     <div class="logo">SilverOrg Bank</div>
     <nav>
-        <a href="#about">About Us</a>
-        <a href="#services">Services</a>
-        <a href="#security">Security</a>
-        <a href="#" class="btn-login">Client Login</a>
+        <a href="#register" style="color: var(--secondary-red);">Open Account</a>
+        <a href="#" class="btn-client">Client Login</a>
+        <a href="#" class="btn-admin">Admin Login</a>
     </nav>
 </header>
 
 <section class="hero">
+    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1920&q=80" alt="Banking Professional" class="hero-bg">
+    <div class="hero-overlay"></div>
     <div class="hero-content">
-        <h1>Excellence in Private Banking</h1>
-        <p>Experience secure, personalized financial management tailored to your distinct goals. Advanced digital tools meet dedicated wealth advisory.</p>
-        <a href="#" class="btn-login" style="display: inline-block;">Get Started</a>
-    </div>
-    <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Professional using digital banking">
+        <h1>Excellence in Private Banking.</h1>
+        <p>Tailored wealth management and secure digital banking designed for your distinct financial journey.</p>
+        <a href="#register" class="btn-get-started">Get Started</a>
     </div>
 </section>
 
-<section class="features" id="services">
-    <h2 class="section-title">Our Core Services</h2>
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>Private Wealth Management</h3>
-            <p>Dedicated advisors providing bespoke investment strategies and portfolio oversight.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Secure Digital Banking</h3>
-            <p>24/7 account access with multi-factor authentication and real-time transaction monitoring.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Global Transfer Services</h3>
-            <p>Seamless, encrypted international wire transfers with competitive exchange rates.</p>
-        </div>
+<section class="registration-section" id="register">
+    <div  <div class="form-container">
+        <h2 style="text-align: center; margin-bottom: 30px; color: var(--secondary-red);">Client Registration</h2>
+        <form onsubmit="event.preventDefault(); alert('Registration simulated successfully.');">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" required placeholder="john@example.com">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" required placeholder="+1 234 567 8900">
+            </div>
+            <div class="form-group">
+                <label>Physical Address</label>
+                <input type="text" required placeholder="123 Financial District">
+            </div>
+            <div class="form-group">
+                <label>Account Type</label>
+                <select>
+                    <option>Personal Savings</option>
+                    <option>Private Wealth Checking</option>
+                    <option>Corporate Treasury</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit">Complete Registration</button>
+        </form>
     </div>
 </section>
-
-<footer>
-    <p>&copy; 2026 SilverOrg Bank. All rights reserved. Simulated demonstration environment.</p>
-</footer>
 
 </body>
 </html>
