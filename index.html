@@ -1,4 +1,4 @@
-html>
+< html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -15,6 +15,8 @@ html>
       --text-muted: #64748b;
       --border: #e2e8f0;
       --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
       --radius: 12px;
       --shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
     }
@@ -35,7 +37,6 @@ html>
       flex-direction: column;
     }
 
-    /* Navigation */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -56,6 +57,7 @@ html>
       align-items: center;
       gap: 0.5rem;
       letter-spacing: -0.5px;
+      cursor: pointer;
     }
 
     .logo-badge {
@@ -64,6 +66,12 @@ html>
       padding: 0.2rem 0.5rem;
       border-radius: 6px;
       font-size: 0.9rem;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
     }
 
     .nav-actions button {
@@ -81,11 +89,20 @@ html>
       background: var(--accent-hover);
     }
 
-    /* View Containers */
+    .nav-actions .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+    }
+
+    .nav-actions .btn-outline:hover {
+      background: #f1f5f9;
+    }
+
     .view {
       display: none;
       flex: 1;
-      animation: fadeIn 0.3s ease;
+      animation: fadeIn 0.25s ease;
     }
 
     .view.active {
@@ -97,7 +114,7 @@ html>
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* View 1: Landing Page */
+    /* Landing Page */
     .hero {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #ffffff;
@@ -122,7 +139,6 @@ html>
       max-width: 780px;
       margin: 0 auto 1.25rem;
       line-height: 1.15;
-      letter-spacing: -0.02em;
     }
 
     .hero p {
@@ -136,20 +152,42 @@ html>
       background: var(--accent);
       color: #ffffff;
       border: none;
-      padding: 0.95rem 2rem;
-      font-size: 1.05rem;
+      padding: 0.85rem 1.75rem;
+      font-size: 1rem;
       font-weight: 600;
       border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.15s, background 0.2s;
+      transition: background 0.2s;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
     }
 
     .btn-primary:hover {
       background: var(--accent-hover);
-      transform: translateY(-1px);
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: #fff;
+      border: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: #fff;
+      border: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.85rem;
     }
 
     .features-section {
@@ -161,15 +199,6 @@ html>
     .section-header {
       text-align: center;
       margin-bottom: 3rem;
-    }
-
-    .section-header h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .section-header p {
-      color: var(--text-muted);
     }
 
     .features-grid {
@@ -196,21 +225,10 @@ html>
       align-items: center;
       justify-content: center;
       font-size: 1.4rem;
-      font-weight: bold;
       margin-bottom: 1.25rem;
     }
 
-    .feature-card h3 {
-      margin-bottom: 0.6rem;
-      font-size: 1.2rem;
-    }
-
-    .feature-card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    /* View 2: Registration Form */
+    /* Forms & Auth */
     .auth-container {
       max-width: 500px;
       margin: 3.5rem auto;
@@ -237,55 +255,54 @@ html>
     }
 
     .form-group {
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.15rem;
     }
 
     .form-group label {
       display: block;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
-      margin-bottom: 0.4rem;
-      color: var(--text-main);
+      margin-bottom: 0.35rem;
     }
 
     .form-group input,
     .form-group select {
       width: 100%;
-      padding: 0.75rem 0.9rem;
+      padding: 0.7rem 0.9rem;
       border: 1px solid var(--border);
       border-radius: 8px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       background: #fff;
-      color: var(--text-main);
-      transition: border-color 0.2s;
     }
 
     .form-group input:focus,
     .form-group select:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
     }
 
     .btn-block {
       width: 100%;
-      justify-content: center;
-      margin-top: 0.5rem;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 1.25rem;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      cursor: pointer;
-      text-decoration: underline;
+    /* Simulated Email Modal / Banner */
+    .email-toast {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
     }
 
-    /* View 3: User Dashboard */
+    /* Dashboard */
     .dashboard-container {
-      max-width: 1150px;
-      margin: 2.5rem auto;
+      max-width: 1200px;
+      margin: 2rem auto;
       padding: 0 5%;
     }
 
@@ -295,16 +312,7 @@ html>
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .dash-welcome h1 {
-      font-size: 1.75rem;
-    }
-
-    .dash-welcome p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
+      margin-bottom: 1.75rem;
     }
 
     .status-pill {
@@ -329,9 +337,9 @@ html>
 
     .accounts-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
     .account-card {
@@ -353,19 +361,18 @@ html>
     }
 
     .card-label {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--text-muted);
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
     }
 
     .balance-amount {
-      font-size: 2.15rem;
+      font-size: 2.1rem;
       font-weight: 700;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.02em;
+      margin-bottom: 0.65rem;
     }
 
     .account-meta {
@@ -375,14 +382,15 @@ html>
       justify-content: space-between;
     }
 
-    .dash-panels {
+    .dash-grid-main {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       gap: 1.5rem;
+      margin-bottom: 2rem;
     }
 
-    @media (max-width: 820px) {
-      .dash-panels {
+    @media (max-width: 900px) {
+      .dash-grid-main {
         grid-template-columns: 1fr;
       }
     }
@@ -400,68 +408,119 @@ html>
       font-size: 1.15rem;
       border-bottom: 1px solid var(--border);
       padding-bottom: 0.75rem;
-    }
-
-    .tx-list {
-      list-style: none;
-    }
-
-    .tx-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.85rem 0;
+    }
+
+    /* Virtual Debit Card UI */
+    .virtual-card {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: white;
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+    }
+
+    .vc-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .vc-number {
+      font-size: 1.25rem;
+      letter-spacing: 0.14em;
+      font-family: monospace;
+      margin-bottom: 1.25rem;
+    }
+
+    .vc-bottom {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .qa-btn {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      padding: 0.75rem 0.5rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .qa-btn:hover {
+      background: #e2e8f0;
+    }
+
+    /* Tables & Transactions */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.75rem 0.5rem;
       border-bottom: 1px solid var(--border);
     }
 
-    .tx-item:last-child {
-      border-bottom: none;
-    }
-
-    .tx-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .tx-date {
-      font-size: 0.8rem;
+    th {
       color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
     }
 
-    .tx-amount {
-      font-weight: 700;
+    .badge {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
     }
 
-    .tx-positive {
-      color: var(--success);
-    }
+    .badge-pending { background: #fef3c7; color: #92400e; }
+    .badge-paid { background: #d1fae5; color: #065f46; }
+    .badge-rejected { background: #fee2e2; color: #991b1b; }
 
     .profile-row {
-      margin-bottom: 0.9rem;
+      margin-bottom: 0.85rem;
       font-size: 0.92rem;
     }
 
     .profile-row span {
       display: block;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 600;
     }
 
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-main);
-      padding: 0.55rem 1rem;
+    .alert-msg {
+      padding: 0.75rem;
       border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
+      font-size: 0.88rem;
+      margin-bottom: 1rem;
+      display: none;
     }
 
-    .btn-outline:hover {
-      background: #f1f5f9;
-    }
+    .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .alert-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
 
     footer {
       text-align: center;
@@ -478,10 +537,11 @@ html>
 
   <!-- Header -->
   <header>
-    <div class="logo">
+    <div class="logo" onclick="switchView('landingView')">
       <span class="logo-badge">AB</span> Aegis Bank
     </div>
     <div class="nav-actions" id="navActions">
+      <button class="btn-outline" onclick="switchView('adminLoginView')">Admin Portal</button>
       <button onclick="switchView('registerView')">Get Started</button>
     </div>
   </header>
@@ -491,10 +551,8 @@ html>
     <section class="hero">
       <span class="hero-tag">256-Bit AES Encrypted &bull; Multi-Factor Protected</span>
       <h1>Banking Built Around Uncompromising Security</h1>
-      <p>Open a global digital account in minutes. Manage your money with real-time fraud monitoring, biometric authentication, and instant international transfers.</p>
-      <button class="btn-primary" onclick="switchView('registerView')">
-        Get Started &rarr;
-      </button>
+      <p>Open a global digital account in minutes. Manage funds, issue virtual cards, and withdraw via PayPal, Venmo, Wire, or Local Bank Transfer.</p>
+      <button class="btn-primary" onclick="switchView('registerView')">Get Started &rarr;</button>
     </section>
 
     <section class="features-section">
@@ -506,17 +564,17 @@ html>
         <div class="feature-card">
           <div class="feature-icon">&#128274;</div>
           <h3>End-to-End Encryption</h3>
-          <p>Every transaction and personal record is safeguarded with bank-grade TLS 1.3 and 256-bit AES encryption at rest and in transit.</p>
+          <p>Every transaction and personal record is safeguarded with bank-grade TLS 1.3 and 256-bit AES encryption.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">&#128737;</div>
-          <h3>24/7 AI Fraud Shield</h3>
-          <p>Continuous behavioral monitoring detects and blocks unauthorized activity before funds ever leave your account.</p>
+          <div class="feature-icon">&#128179;</div>
+          <h3>Instant Virtual Cards</h3>
+          <p>Generate and freeze virtual debit cards directly from your dashboard for safe online payments.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">&#127760;</div>
-          <h3>Global Multi-Currency</h3>
-          <p>Hold, convert, and send funds across borders seamlessly with transparent exchange rates and zero hidden fees.</p>
+          <h3>Flexible Global Payouts</h3>
+          <p>Withdraw funds seamlessly to PayPal, Venmo, international wire accounts, or local banks.</p>
         </div>
       </div>
     </section>
@@ -567,21 +625,46 @@ html>
             <input type="password" id="password" placeholder="Minimum 8 characters" minlength="8" required />
           </div>
 
-          <button type="submit" class="btn-primary btn-block">Create Account &amp; Go to Dashboard</button>
+          <button type="submit" class="btn-primary btn-block">Create Account &amp; Verify Email</button>
         </form>
-
-        <span class="back-link" onclick="switchView('landingView')">&larr; Back to Security Overview</span>
       </div>
     </div>
   </main>
 
-  <!-- VIEW 3: USER DASHBOARD -->
+  <!-- VIEW 3: EMAIL NOTIFICATION CONFIRMATION -->
+  <main id="emailConfirmView" class="view">
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="email-toast">
+          <div>
+            <strong>&#9993; Welcome Email Dispatched!</strong><br />
+            <small>Sent to <span id="sentToEmail"></span></small>
+          </div>
+          <span class="badge badge-paid">Delivered</span>
+        </div>
+
+        <h2>Account Created Successfully</h2>
+        <p class="subtitle">We have sent a welcome confirmation email with your account number and security credentials.</p>
+
+        <div style="background:#f8fafc; border:1px solid var(--border); padding:1rem; border-radius:8px; margin-bottom:1.5rem; font-size:0.9rem;">
+          <p><strong>Subject:</strong> Welcome to Aegis Bank — Your Account is Ready</p>
+          <p style="margin-top:0.5rem; color:var(--text-muted);">
+            Hello <strong id="emailBodyName"></strong>, your Aegis Bank account (<strong id="emailBodyAcc"></strong>) has been activated. Your starting balance is <strong>$0.00</strong>. Log in below to access your dashboard.
+          </p>
+        </div>
+
+        <button class="btn-primary btn-block" onclick="switchView('dashboardView')">Proceed to Account Dashboard &rarr;</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- VIEW 4: USER DASHBOARD -->
   <main id="dashboardView" class="view">
     <div class="dashboard-container">
       <div class="dash-header">
-        <div class="dash-welcome">
-          <h1 id="welcomeHeading">Welcome back</h1>
-          <p id="accountSubtext">Account #4089-7721-9043 &bull; Standard Checking &amp; Vault</p>
+        <div>
+          <h1 id="welcomeHeading">Welcome</h1>
+          <p id="accountSubtext" style="color:var(--text-muted); font-size:0.95rem;"></p>
         </div>
         <div class="status-pill">
           <span class="dot"></span> Security Shield Active
@@ -591,142 +674,68 @@ html>
       <!-- Balances -->
       <div class="accounts-grid">
         <div class="account-card primary-card">
-          <div class="card-label">Total Available Balance</div>
-          <div class="balance-amount">$12,450.00</div>
+          <div class="card-label">Available Checking Balance</div>
+          <div class="balance-amount" id="userBalanceDisplay">$0.00</div>
           <div class="account-meta">
-            <span>Primary Checking</span>
-            <span>USD &bull; Active</span>
+            <span>Primary USD Account</span>
+            <span>Active</span>
           </div>
         </div>
 
         <div class="account-card">
-          <div class="card-label">High-Yield Savings Vault</div>
-          <div class="balance-amount">$8,200.50</div>
+          <div class="card-label">Total Withdrawn</div>
+          <div class="balance-amount" id="userWithdrawnDisplay">$0.00</div>
           <div class="account-meta">
-            <span>4.75% APY</span>
-            <span>Insured</span>
+            <span>Completed Payouts</span>
+            <span>0% Fee</span>
           </div>
         </div>
 
         <div class="account-card">
-          <div class="card-label">Monthly Spending Limit</div>
-          <div class="balance-amount">$3,120.00</div>
+          <div class="card-label">Pending Withdrawals</div>
+          <div class="balance-amount" id="userPendingDisplay">$0.00</div>
           <div class="account-meta">
-            <span>Remaining of $5,000</span>
-            <span>Card •• 4821</span>
+            <span>Awaiting Admin Approval</span>
+            <span>24h SLA</span>
           </div>
         </div>
       </div>
 
-      <!-- Transactions & Verified Profile -->
-      <div class="dash-panels">
+      <!-- Withdrawal Section & Virtual Card / Profile -->
+      <div class="dash-grid-main">
+        <!-- Left: Withdrawal Form -->
         <div class="panel">
-          <h3>Recent Activity</h3>
-          <ul class="tx-list">
-            <li class="tx-item">
-              <div>
-                <div class="tx-title">Welcome Bonus Deposit</div>
-                <div class="tx-date">Today &bull; Instant Credit</div>
-              </div>
-              <div class="tx-amount tx-positive">+$250.00</div>
-            </li>
-            <li class="tx-item">
-              <div>
-                <div class="tx-title">Initial Account Funding</div>
-                <div class="tx-date">Today &bull; Wire Transfer</div>
-              </div>
-              <div class="tx-amount tx-positive">+$12,200.00</div>
-            </li>
-            <li class="tx-item">
-              <div>
-                <div class="tx-title">Savings Vault Allocation</div>
-                <div class="tx-date">Today &bull; Automated Rule</div>
-              </div>
-              <div class="tx-amount tx-positive">+$8,200.50</div>
-            </li>
-          </ul>
+          <h3>Withdraw Funds</h3>
+          <div id="withdrawAlert" class="alert-msg"></div>
+
+          <form id="withdrawForm" onsubmit="handleWithdrawal(event)">
+            <div class="form-group">
+              <label for="withdrawMethod">Select Withdrawal Method</label>
+              <select id="withdrawMethod" onchange="updateWithdrawFields()" required>
+                <option value="PayPal">PayPal</option>
+                <option value="Venmo">Venmo</option>
+                <option value="Wire Transfer">International / Domestic Wire Transfer</option>
+                <option value="Local Bank Transfer">Local Bank Transfer</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="withdrawAmount">Amount (USD)</label>
+              <input type="number" id="withdrawAmount" step="0.01" min="1" placeholder="0.00" required />
+            </div>
+
+            <div id="dynamicWithdrawFields"></div>
+
+            <button type="submit" class="btn-primary btn-block">Submit Withdrawal Request</button>
+          </form>
         </div>
 
+        <!-- Right: Virtual Card & Profile -->
         <div class="panel">
-          <h3>Verified Account Profile</h3>
-          <div class="profile-row">
-            <span>Account Holder</span>
-            <strong id="profName">—</strong>
-          </div>
-          <div class="profile-row">
-            <span>Country of Residence</span>
-            <strong id="profCountry">—</strong>
-          </div>
-          <div class="profile-row">
-            <span>Registered Phone</span>
-            <strong id="profPhone">—</strong>
-          </div>
-          <div class="profile-row">
-            <span>Email Address</span>
-            <strong id="profEmail">—</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    &copy; 2026 Aegis Bank. Protected by 256-bit SSL Encryption. Member FDIC / Global Deposit Insurance.
-  </footer>
-
-  <script>
-    function switchView(viewId) {
-      document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
-      document.getElementById(viewId).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      const navActions = document.getElementById('navActions');
-      if (viewId === 'dashboardView') {
-        navActions.innerHTML = '<button class="btn-outline" onclick="logout()">Sign Out</button>';
-      } else if (viewId === 'registerView') {
-        navActions.innerHTML = '<button class="btn-outline" onclick="switchView(\'landingView\')">Home</button>';
-      } else {
-        navActions.innerHTML = '<button onclick="switchView(\'registerView\')">Get Started</button>';
-      }
-    }
-
-    function handleRegistration(event) {
-      event.preventDefault();
-
-      const userData = {
-        fullName: document.getElementById('fullName').value.trim(),
-        country: document.getElementById('country').value,
-        phone: document.getElementById('phone').value.trim(),
-        email: document.getElementById('email').value.trim()
-      };
-
-      localStorage.setItem('aegisUser', JSON.stringify(userData));
-      populateDashboard(userData);
-      switchView('dashboardView');
-    }
-
-    function populateDashboard(user) {
-      document.getElementById('welcomeHeading').textContent = `Welcome, ${user.fullName}`;
-      document.getElementById('profName').textContent = user.fullName;
-      document.getElementById('profCountry').textContent = user.country;
-      document.getElementById('profPhone').textContent = user.phone;
-      document.getElementById('profEmail').textContent = user.email;
-    }
-
-    function logout() {
-      localStorage.removeItem('aegisUser');
-      document.getElementById('registrationForm').reset();
-      switchView('landingView');
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('aegisUser');
-      if (saved) {
-        const user = JSON.parse(saved);
-        populateDashboard(user);
-        switchView('dashboardView');
-      }
-    });
-  </script>
-</body>
-    </html>
+          <h3>Virtual Card &amp; Quick Features</h3>
+          <div class="virtual-card" id="virtualCardBox">
+            <div class="vc-top">
+              <span>AEGIS VIRTUAL DEBIT</span>
+              <span id="cardStatusText">ACTIVE</span>
+            </div>
+        
