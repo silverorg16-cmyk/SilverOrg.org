@@ -67,6 +67,7 @@
       flex-direction: column;
     }
 
+    /* Hero Section */
     .hero {
       position: relative;
       min-height: 90vh;
@@ -136,6 +137,51 @@
       background: var(--accent-hover);
     }
 
+    /* Security & About Section */
+    .security-section {
+      padding: 5rem 5%;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--primary);
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .security-card {
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .security-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .security-card p {
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Auth Forms */
     .auth-container {
       flex: 1;
       display: flex;
@@ -208,6 +254,7 @@
       background: var(--accent-hover);
     }
 
+    /* Dashboard */
     .dashboard {
       padding: 2rem 5%;
       max-width: 1200px;
@@ -283,7 +330,7 @@
     }
 
     .detail-card p {
-      font-size: 1.2żej;
+      font-size: 1.2rem;
       font-weight: 600;
     }
 
@@ -310,6 +357,7 @@
     @media (max-width: 768px) {
       .form-row { grid-template-columns: 1fr; }
       .form-group.full-width { grid-column: span 1; }
+      .hero h1 { font-size: 3rem; }
     }
   </style>
 </head>
@@ -329,6 +377,26 @@
         <h1>Banking Built For The Digital Age</h1>
         <p>Experience secure, fast, and reliable global financial services at your fingertips. High-class security meets modern convenience.</p>
         <button class="cta-btn" onclick="switchView('register')">Get Started</button>
+      </div>
+    </section>
+
+    <section class="security-section">
+      <div class="section-container">
+        <h2 class="section-title">Uncompromising Security & Trust</h2>
+        <div class="security-grid">
+          <div class="security-card">
+            <h3>Military-Grade Encryption</h3>
+            <p>Your financial data and transactions are protected by advanced end to end encryption protocols, ensuring absolute privacy.</p>
+          </div>
+          <div class="security-card">
+            <h3>Global Compliance</h3>
+            <p>We adhere to strict international banking standards and regulatory frameworks to keep your assets safe across borders.</p>
+          </div>
+          <div class="security-card">
+            <h3>24/7 Fraud Monitoring</h3>
+            <p>Our intelligent security systems actively monitor your account around the clock to detect and prevent unauthorized activity.</p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -503,4 +571,3 @@
 </body>
 </html>
 
-        
