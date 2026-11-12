@@ -1,9 +1,9 @@
-< html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aegis Bank — Modern Digital Banking</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EB Bank — Secure Digital Banking</title>
   <style>
     :root {
       --primary: #0f172a;
@@ -15,28 +15,26 @@
       --text-muted: #64748b;
       --border: #e2e8f0;
       --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
       --radius: 12px;
-      --shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
       background-color: var(--bg);
       color: var(--text-main);
-      line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
+    /* Header */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -50,164 +48,248 @@
     }
 
     .logo {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: var(--primary);
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      letter-spacing: -0.5px;
-      cursor: pointer;
     }
 
-    .logo-badge {
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-btn {
       background: var(--accent);
-      color: #fff;
-      padding: 0.2rem 0.5rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-    }
-
-    .nav-actions {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
-    }
-
-    .nav-actions button {
-      background: var(--accent);
-      color: #fff;
+      color: white;
       border: none;
-      padding: 0.6rem 1.25rem;
+      padding: 0.6rem 1.2rem;
       border-radius: 8px;
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s;
     }
 
-    .nav-actions button:hover {
+    .nav-btn:hover {
       background: var(--accent-hover);
     }
 
-    .nav-actions .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-main);
-    }
-
-    .nav-actions .btn-outline:hover {
-      background: #f1f5f9;
-    }
-
+    /* Views */
     .view {
       display: none;
       flex: 1;
-      animation: fadeIn 0.25s ease;
     }
 
     .view.active {
-      display: block;
+      display: flex;
+      flex-direction: column;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Landing Page */
+    /* Hero Section */
     .hero {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      color: #ffffff;
-      padding: 5rem 5%;
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--primary);
+      color: white;
       text-align: center;
+      padding: 4rem 1rem;
     }
 
-    .hero-tag {
-      display: inline-block;
-      background: rgba(37, 99, 235, 0.25);
-      color: #93c5fd;
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1.25rem;
-      border: 1px solid rgba(147, 197, 253, 0.3);
+    .hero-bg-media {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(10px);
+      padding: 3rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 4vw, 3.25rem);
-      max-width: 780px;
-      margin: 0 auto 1.25rem;
-      line-height: 1.15;
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
     }
 
     .hero p {
-      color: #cbd5e1;
-      max-width: 600px;
-      margin: 0 auto 2.25rem;
-      font-size: 1.1rem;
+      font-size: 1.25rem;
+      color: #94a3b8;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
     }
 
-    .btn-primary {
+    .hero .cta-btn {
+      font-size: 1.2rem;
+      padding: 1rem 2.5rem;
       background: var(--accent);
-      color: #ffffff;
+      color: white;
       border: none;
-      padding: 0.85rem 1.75rem;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 10px;
+      border-radius: 50px;
+      font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
+      transition: transform 0.2s, background 0.2s;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5);
     }
 
-    .btn-primary:hover {
+    .hero .cta-btn:hover {
+      transform: scale(1.05);
       background: var(--accent-hover);
     }
 
-    .btn-success {
-      background: var(--success);
-      color: #fff;
-      border: none;
-      padding: 0.45rem 0.9rem;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
-
-    .btn-danger {
-      background: var(--danger);
-      color: #fff;
-      border: none;
-      padding: 0.45rem 0.9rem;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
-
-    .features-section {
-      padding: 4.5rem 5%;
+    /* Features Section */
+    .features {
+      padding: 5rem 5%;
+      background: var(--surface);
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    .section-header {
+    .section-title {
       text-align: center;
+      font-size: 2.5rem;
       margin-bottom: 3rem;
     }
 
-    .features-grid {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
     }
 
-    .feature-card {
+    .card {
+      padding: 2rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    /* Auth Forms */
+    .auth-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .auth-box {
+      background: var(--surface);
+      padding: 3rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .auth-box h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .auth-box p {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Dashboard */
+    .dashboard {
+      padding: 2rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+      flex: 1;
+      width: 100%;
+    }
+
+    .welcome-banner {
+      background: var(--primary);
+      color: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .balance-card {
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      color: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+      max-width: 400px;
+    }
+
+    .balance-card h3 {
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .balance-amount {
+      font-size: 3rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+    }
+
+    .panel {
       background: var(--surface);
       padding: 2rem;
       border-radius: var(--radius);
@@ -215,321 +297,76 @@
       box-shadow: var(--shadow);
     }
 
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      background: #eff6ff;
-      color: var(--accent);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 1.25rem;
-    }
-
-    /* Forms & Auth */
-    .auth-container {
-      max-width: 500px;
-      margin: 3.5rem auto;
-      padding: 0 1.25rem;
-    }
-
-    .auth-card {
-      background: var(--surface);
-      padding: 2.5rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .auth-card h2 {
-      font-size: 1.65rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .auth-card .subtitle {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.75rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.15rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.88rem;
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-    }
-
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 0.7rem 0.9rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      background: #fff;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-
-    .btn-block {
-      width: 100%;
-    }
-
-    /* Simulated Email Modal / Banner */
-    .email-toast {
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      color: #065f46;
-      padding: 1rem 1.25rem;
-      border-radius: 10px;
-      margin-bottom: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    /* Dashboard */
-    .dashboard-container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 5%;
-    }
-
-    .dash-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.75rem;
-    }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: #ecfdf5;
-      color: #065f46;
-      padding: 0.4rem 0.85rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border: 1px solid #a7f3d0;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      background: var(--success);
-      border-radius: 50%;
-    }
-
-    .accounts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .account-card {
-      background: var(--surface);
-      padding: 1.75rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .account-card.primary-card {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      color: #ffffff;
-      border: none;
-    }
-
-    .account-card.primary-card .card-label {
-      color: #94a3b8;
-    }
-
-    .card-label {
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-bottom: 0.45rem;
-    }
-
-    .balance-amount {
-      font-size: 2.1rem;
-      font-weight: 700;
-      margin-bottom: 0.65rem;
-    }
-
-    .account-meta {
-      font-size: 0.85rem;
-      opacity: 0.85;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .dash-grid-main {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    @media (max-width: 900px) {
-      .dash-grid-main {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .panel {
-      background: var(--surface);
-      padding: 1.75rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
     .panel h3 {
-      margin-bottom: 1.25rem;
-      font-size: 1.15rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.75rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    /* Virtual Debit Card UI */
-    .virtual-card {
-      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-      color: white;
-      border-radius: 14px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-      position: relative;
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
-    }
-
-    .vc-top {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      opacity: 0.9;
       margin-bottom: 1.5rem;
     }
 
-    .vc-number {
-      font-size: 1.25rem;
-      letter-spacing: 0.14em;
-      font-family: monospace;
-      margin-bottom: 1.25rem;
-    }
-
-    .vc-bottom {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-    }
-
-    .quick-actions {
+    .withdraw-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 1rem;
     }
 
-    .qa-btn {
-      background: #f1f5f9;
+    .withdraw-option {
+      padding: 1rem;
       border: 1px solid var(--border);
-      padding: 0.75rem 0.5rem;
       border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
       text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-size: 0.9rem;
+      font-weight: 500;
     }
 
-    .qa-btn:hover {
-      background: #e2e8f0;
+    .withdraw-option:hover, .withdraw-option.selected {
+      border-color: var(--accent);
+      background: #eff6ff;
     }
 
-    /* Tables & Transactions */
+    /* Email Modal */
+    .email-modal {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--surface);
+      border-left: 5px solid var(--success);
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border-radius: 4px;
+      z-index: 1000;
+      max-width: 350px;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Admin specific */
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.9rem;
+      margin-top: 1rem;
     }
 
     th, td {
       text-align: left;
-      padding: 0.75rem 0.5rem;
+      padding: 1rem;
       border-bottom: 1px solid var(--border);
     }
 
-    th {
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 0.8rem;
-      text-transform: uppercase;
+    .admin-fund-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
     }
 
-    .badge {
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .badge-pending { background: #fef3c7; color: #92400e; }
-    .badge-paid { background: #d1fae5; color: #065f46; }
-    .badge-rejected { background: #fee2e2; color: #991b1b; }
-
-    .profile-row {
-      margin-bottom: 0.85rem;
-      font-size: 0.92rem;
-    }
-
-    .profile-row span {
-      display: block;
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .alert-msg {
-      padding: 0.75rem;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      margin-bottom: 1rem;
-      display: none;
-    }
-
-    .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
-    .alert-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
-
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-      margin-top: auto;
+    @media (max-width: 768px) {
+      .control-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.2rem; }
     }
   </style>
 </head>
@@ -537,205 +374,319 @@
 
   <!-- Header -->
   <header>
-    <div class="logo" onclick="switchView('landingView')">
-      <span class="logo-badge">AB</span> Aegis Bank
-    </div>
-    <div class="nav-actions" id="navActions">
-      <button class="btn-outline" onclick="switchView('adminLoginView')">Admin Portal</button>
-      <button onclick="switchView('registerView')">Get Started</button>
+    <div class="logo" onclick="switchView('landing')">EB<span>Bank</span></div>
+    <div>
+      <button class="nav-btn" id="headerNavBtn" onclick="switchView('login')">Admin Portal</button>
     </div>
   </header>
 
-  <!-- VIEW 1: LANDING PAGE -->
-  <main id="landingView" class="view active">
+  <!-- VIEW 1: Landing Page -->
+  <main id="view-landing" class="view active">
     <section class="hero">
-      <span class="hero-tag">256-Bit AES Encrypted &bull; Multi-Factor Protected</span>
-      <h1>Banking Built Around Uncompromising Security</h1>
-      <p>Open a global digital account in minutes. Manage funds, issue virtual cards, and withdraw via PayPal, Venmo, Wire, or Local Bank Transfer.</p>
-      <button class="btn-primary" onclick="switchView('registerView')">Get Started &rarr;</button>
+      <video autoplay loop muted playsinline class="hero-bg-media">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-typing-on-a-laptop-keyboard-43093-large.mp4" type="video/mp4">
+      </video>
+      <div class="hero-content">
+        <h1>Banking Built For The Digital Age</h1>
+        <p>Experience secure, fast, and reliable global financial services at your fingertips. High-class security meets modern convenience.</p>
+        <button class="cta-btn" onclick="switchView('register')">Get Started</button>
+      </div>
     </section>
 
-    <section class="features-section">
-      <div class="section-header">
-        <h2>Why Customers Trust Aegis Bank</h2>
-        <p>Institutional-grade protection paired with everyday simplicity.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">&#128274;</div>
-          <h3>End-to-End Encryption</h3>
-          <p>Every transaction and personal record is safeguarded with bank-grade TLS 1.3 and 256-bit AES encryption.</p>
+    <section class="features">
+      <h2 class="section-title">Why Choose EB Bank</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Ironclad Security</h3>
+          <p>Multi-layer encryption ensuring your assets and data remain strictly confidential.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128179;</div>
-          <h3>Instant Virtual Cards</h3>
-          <p>Generate and freeze virtual debit cards directly from your dashboard for safe online payments.</p>
+        <div class="card">
+          <h3>Global Transfers</h3>
+          <p>Send and receive funds globally using local banks, wire, or major digital wallets effortlessly.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#127760;</div>
-          <h3>Flexible Global Payouts</h3>
-          <p>Withdraw funds seamlessly to PayPal, Venmo, international wire accounts, or local banks.</p>
+        <div class="card">
+          <h3>24/7 Support</h3>
+          <p>Dedicated financial concierge services available round the clock for all account tiers.</p>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- VIEW 2: REGISTRATION FORM -->
-  <main id="registerView" class="view">
+  <!-- VIEW 2: Registration -->
+  <main id="view-register" class="view">
     <div class="auth-container">
-      <div class="auth-card">
-        <h2>Create Your Account</h2>
-        <p class="subtitle">Enter your details below to open your secure Aegis Bank account.</p>
-
-        <form id="registrationForm" onsubmit="handleRegistration(event)">
+      <div class="auth-box">
+        <h2>Create Account</h2>
+        <p>Enter your details to initialize your account.</p>
+        <form id="form-register">
           <div class="form-group">
-            <label for="fullName">Full Legal Name</label>
-            <input type="text" id="fullName" placeholder="e.g. Jordan Taylor" required />
+            <label>Full Name</label>
+            <input type="text" id="reg-name" required placeholder="John Doe">
           </div>
-
           <div class="form-group">
-            <label for="country">Country of Residence</label>
-            <select id="country" required>
-              <option value="" disabled selected>Select your country</option>
-              <option value="Nigeria">Nigeria</option>
+            <label>Email Address</label>
+            <input type="email" id="reg-email" required placeholder="john@example.com">
+          </div>
+          <div class="form-group">
+            <label>Country of Residence</label>
+            <select id="reg-country" required>
               <option value="United States">United States</option>
               <option value="United Kingdom">United Kingdom</option>
-              <option value="Canada">Canada</option>
-              <option value="Germany">Germany</option>
-              <option value="Ghana">Ghana</option>
-              <option value="Kenya">Kenya</option>
-              <option value="South Africa">South Africa</option>
-              <option value="United Arab Emirates">United Arab Emirates</option>
-              <option value="Australia">Australia</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="Global">Other</option>
             </select>
           </div>
-
           <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" placeholder="e.g. +234 800 000 0000" required />
+            <label>Phone Number</label>
+            <input type="tel" id="reg-phone" required placeholder="+1 234 567 8900">
           </div>
-
           <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" placeholder="you@example.com" required />
+            <label>Government ID Upload (Verification)</label>
+            <input type="file" required accept="image/*">
           </div>
-
-          <div class="form-group">
-            <label for="password">Create Password</label>
-            <input type="password" id="password" placeholder="Minimum 8 characters" minlength="8" required />
-          </div>
-
-          <button type="submit" class="btn-primary btn-block">Create Account &amp; Verify Email</button>
+          <button type="submit" class="submit-btn">Complete Registration</button>
         </form>
       </div>
     </div>
   </main>
 
-  <!-- VIEW 3: EMAIL NOTIFICATION CONFIRMATION -->
-  <main id="emailConfirmView" class="view">
-    <div class="auth-container">
-      <div class="auth-card">
-        <div class="email-toast">
-          <div>
-            <strong>&#9993; Welcome Email Dispatched!</strong><br />
-            <small>Sent to <span id="sentToEmail"></span></small>
+  <!-- VIEW 3: Client Dashboard -->
+  <main id="view-dashboard" class="view">
+    <div class="dashboard">
+      <div class="welcome-banner">
+        <div>
+          <h2 id="dash-user-name">Welcome Back</h2>
+          <p>Account Status: <span style="color: var(--success); font-weight: bold;">Verified</span></p>
+        </div>
+        <button class="nav-btn" style="background: #ef4444;" onclick="switchView('landing')">Log Out</button>
+      </div>
+
+      <div class="balance-card">
+        <h3>Total Balance</h3>
+        <div class="balance-amount" id="dash-balance">$0.00</div>
+        <p>Instant Liquidity Available</p>
+      </div>
+
+      <div class="control-grid">
+        <div class="panel">
+          <h3>Quick Transfer / Withdraw</h3>
+          <p style="margin-bottom: 1rem; color: var(--text-muted);">Select destination method:</p>
+          <div class="withdraw-grid" id="withdraw-options">
+            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Local Bank</div>
+            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Wire Transfer</div>
+            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Cash App</div>
+            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Venmo</div>
+            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Zelle</div>
+            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Wise</div>
+            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Skrill</div>
           </div>
-          <span class="badge badge-paid">Delivered</span>
+          <button style="margin-top: 1.5rem; width: 100%;" class="submit-btn" id="withdraw-btn">Proceed to Transfer</button>
         </div>
-
-        <h2>Account Created Successfully</h2>
-        <p class="subtitle">We have sent a welcome confirmation email with your account number and security credentials.</p>
-
-        <div style="background:#f8fafc; border:1px solid var(--border); padding:1rem; border-radius:8px; margin-bottom:1.5rem; font-size:0.9rem;">
-          <p><strong>Subject:</strong> Welcome to Aegis Bank — Your Account is Ready</p>
-          <p style="margin-top:0.5rem; color:var(--text-muted);">
-            Hello <strong id="emailBodyName"></strong>, your Aegis Bank account (<strong id="emailBodyAcc"></strong>) has been activated. Your starting balance is <strong>$0.00</strong>. Log in below to access your dashboard.
-          </p>
-        </div>
-
-        <button class="btn-primary btn-block" onclick="switchView('dashboardView')">Proceed to Account Dashboard &rarr;</button>
+        <div></div>
       </div>
     </div>
   </main>
 
-  <!-- VIEW 4: USER DASHBOARD -->
-  <main id="dashboardView" class="view">
-    <div class="dashboard-container">
-      <div class="dash-header">
-        <div>
-          <h1 id="welcomeHeading">Welcome</h1>
-          <p id="accountSubtext" style="color:var(--text-muted); font-size:0.95rem;"></p>
-        </div>
-        <div class="status-pill">
-          <span class="dot"></span> Security Shield Active
-        </div>
+  <!-- VIEW 4: Admin Login -->
+  <main id="view-login" class="view">
+    <div class="auth-container">
+      <div class="auth-box">
+        <h2>Admin Authentication</h2>
+        <p>Enter administrative credentials.</p>
+        <form id="form-login">
+          <div class="form-group">
+            <label>Master Passcode</label>
+            <input type="password" id="admin-pass" required placeholder="••••">
+          </div>
+          <button type="submit" class="submit-btn" style="background: #0f172a;">Authenticate</button>
+        </form>
       </div>
+    </div>
+  </main>
 
-      <!-- Balances -->
-      <div class="accounts-grid">
-        <div class="account-card primary-card">
-          <div class="card-label">Available Checking Balance</div>
-          <div class="balance-amount" id="userBalanceDisplay">$0.00</div>
-          <div class="account-meta">
-            <span>Primary USD Account</span>
-            <span>Active</span>
-          </div>
-        </div>
-
-        <div class="account-card">
-          <div class="card-label">Total Withdrawn</div>
-          <div class="balance-amount" id="userWithdrawnDisplay">$0.00</div>
-          <div class="account-meta">
-            <span>Completed Payouts</span>
-            <span>0% Fee</span>
-          </div>
-        </div>
-
-        <div class="account-card">
-          <div class="card-label">Pending Withdrawals</div>
-          <div class="balance-amount" id="userPendingDisplay">$0.00</div>
-          <div class="account-meta">
-            <span>Awaiting Admin Approval</span>
-            <span>24h SLA</span>
-          </div>
-        </div>
+  <!-- VIEW 5: Admin Dashboard -->
+  <main id="view-admin" class="view">
+    <div class="dashboard">
+      <div class="welcome-banner" style="background: #0f172a;">
+        <h2>Administrator Control Center</h2>
+        <button class="nav-btn" style="background: #ef4444;" onclick="switchView('landing')">Sign Out</button>
       </div>
-
-      <!-- Withdrawal Section & Virtual Card / Profile -->
-      <div class="dash-grid-main">
-        <!-- Left: Withdrawal Form -->
+      <div class="control-grid">
         <div class="panel">
-          <h3>Withdraw Funds</h3>
-          <div id="withdrawAlert" class="alert-msg"></div>
-
-          <form id="withdrawForm" onsubmit="handleWithdrawal(event)">
-            <div class="form-group">
-              <label for="withdrawMethod">Select Withdrawal Method</label>
-              <select id="withdrawMethod" onchange="updateWithdrawFields()" required>
-                <option value="PayPal">PayPal</option>
-                <option value="Venmo">Venmo</option>
-                <option value="Wire Transfer">International / Domestic Wire Transfer</option>
-                <option value="Local Bank Transfer">Local Bank Transfer</option>
-              </select>
+          <h3>Fund Client Account</h3>
+          <form id="form-fund" class="admin-fund-form">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label>Select Client</label>
+              <select id="admin-user-select" required></select>
             </div>
-
-            <div class="form-group">
-              <label for="withdrawAmount">Amount (USD)</label>
-              <input type="number" id="withdrawAmount" step="0.01" min="1" placeholder="0.00" required />
+            <div class="form-group" style="margin-bottom: 0;">
+              <label>Amount ($)</label>
+              <input type="number" id="admin-fund-amt" step="any" required placeholder="0.00">
             </div>
-
-            <div id="dynamicWithdrawFields"></div>
-
-            <button type="submit" class="btn-primary btn-block">Submit Withdrawal Request</button>
+            <button type="submit" class="submit-btn" style="background: #0f172a;">Credit Account</button>
           </form>
         </div>
-
-        <!-- Right: Virtual Card & Profile -->
         <div class="panel">
-          <h3>Virtual Card &amp; Quick Features</h3>
-          <div class="virtual-card" id="virtualCardBox">
-            <div class="vc-top">
-              <span>AEGIS VIRTUAL DEBIT</span>
-              <span id="cardStatusText">ACTIVE</span>
-            </div>
-        
+          <h3>Client Directory</h3>
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Balance</th>
+                </tr>
+              </thead>
+              <tbody id="admin-user-list"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Email Simulation Modal -->
+  <div id="email-modal" class="email-modal">
+    <div style="font-weight: bold; margin-bottom: 0.5rem;">✉️ New Notification</div>
+    <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem;">Subject: Welcome to EB Bank!</div>
+    <div id="email-body" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;"></div>
+  </div>
+
+  <script>
+    // State Management
+    const state = {
+      users: JSON.parse(localStorage.getItem('eb_users')) || [],
+      currentUser: null,
+      withdrawMethod: null
+    };
+
+    function saveState() {
+      localStorage.setItem('eb_users', JSON.stringify(state.users));
+    }
+
+    // Router
+    const views = {
+      landing: document.getElementById('view-landing'),
+      register: document.getElementById('view-register'),
+      dashboard: document.getElementById('view-dashboard'),
+      login: document.getElementById('view-login'),
+      admin: document.getElementById('view-admin')
+    };
+
+    function switchView(viewName) {
+      Object.keys(views).forEach(key => {
+        views[key].style.display = key === viewName ? 'flex' : 'none';
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      const headerBtn = document.getElementById('headerNavBtn');
+      if(viewName === 'landing') {
+        headerBtn.textContent = 'Admin Portal';
+        headerBtn.onclick = () => switchView('login');
+      } else {
+        headerBtn.textContent = 'Home';
+        headerBtn.onclick = () => switchView('landing');
+      }
+
+      if(viewName === 'admin') {
+        updateAdminView();
+      }
+    }
+
+    // Registration Flow
+    document.getElementById('form-register').onsubmit = function(e) {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value;
+      const email = document.getElementById('reg-email').value;
+      const country = document.getElementById('reg-country').value;
+      const phone = document.getElementById('reg-phone').value;
+
+      if(state.users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+        alert('User with this email already exists.');
+        return;
+      }
+
+      const newUser = { name, email, country, phone, balance: 0.00 };
+      state.users.push(newUser);
+      saveState();
+      state.currentUser = newUser;
+
+      triggerEmail(email, `Dear ${name},<br><br>Welcome to EB Bank! Your account has been initialized successfully. Your starting balance is $0.00.<br><br>Best regards,<br>EB Bank Team`);
+      updateDashboard();
+      switchView('dashboard');
+    };
+
+    function triggerEmail(email, body) {
+      document.getElementById('email-body').innerHTML = `<strong>To:</strong> ${email}<br><br>${body}`;
+      const modal = document.getElementById('email-modal');
+      modal.style.display = 'block';
+      setTimeout(() => { modal.style.display = 'none'; }, 8000);
+    }
+
+    function updateDashboard() {
+      if(!state.currentUser) return;
+      document.getElementById('dash-user-name').textContent = `Welcome Back, ${state.currentUser.name}`;
+      document.getElementById('dash-balance').textContent = `$${state.currentUser.balance.toFixed(2)}`;
+    }
+
+    // Withdrawal Flow
+    window.selectWithdrawMethod = function(el) {
+      document.querySelectorAll('.withdraw-option').forEach(opt => opt.classList.remove('selected'));
+      el.classList.add('selected');
+      state.withdrawMethod = el.textContent;
+    };
+
+    document.getElementById('withdraw-btn').onclick = function() {
+      if(!state.withdrawMethod) {
+        alert('Please select a withdrawal method.');
+        return;
+      }
+      if(!state.currentUser || state.currentUser.balance <= 0) {
+        alert('Insufficient funds.');
+        return;
+      }
+      alert(`Withdrawal request of $${state.currentUser.balance.toFixed(2)} via ${state.withdrawMethod} submitted.`);
+    };
+
+    // Admin Flow
+    document.getElementById('form-login').onsubmit = function(e) {
+      e.preventDefault();
+      if(document.getElementById('admin-pass').value === 'admin123') {
+        document.getElementById('admin-pass').value = '';
+        switchView('admin');
+      } else {
+        alert('Invalid Passcode.');
+      }
+    };
+
+    function updateAdminView() {
+      const select = document.getElementById('admin-user-select');
+      const tbody = document.getElementById('admin-user-list');
+      
+      select.innerHTML = '<option value="" disabled selected>Choose a user</option>';
+      tbody.innerHTML = '';
+
+      state.users.forEach((user, index) => {
+        const opt = document.createElement('option');
+        opt.value = index;
+        opt.textContent = `${user.name} (${user.email})`;
+        select.appendChild(opt);
+
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${user.name}</td><td>${user.email}</td><td style="font-weight:bold; color:var(--success);">$${user.balance.toFixed(2)}</td>`;
+        tbody.appendChild(row);
+      });
+    }
+
+    document.getElementById('form-fund').onsubmit = function(e) {
+      e.preventDefault();
+      const idx = document.getElementById('admin-user-select').value;
+      const amt = parseFloat(document.getElementById('admin-fund-amt').value);
+
+      if(idx === "" || isNaN(amt) || amt <= 0) return;
+
+      state.users[idx].balance += amt;
+      saveState();
+      document.getElementById('admin-fund-amt').value = '';
+      
+      if(state.currentUser && state.currentUser.email === state.user
