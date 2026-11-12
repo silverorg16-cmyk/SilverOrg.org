@@ -108,37 +108,39 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.4;
+      opacity: 0.5;
       z-index: 1;
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 800px;
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(10px);
-      padding: 3rem;
+      max-width: 900px;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      padding: 4rem;
       border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      margin: 0 1rem;
     }
 
     .hero h1 {
-      font-size: 3.5rem;
+      font-size: 4rem;
       margin-bottom: 1.5rem;
       font-weight: 800;
+      line-height: 1.1;
     }
 
     .hero p {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       color: #94a3b8;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
       line-height: 1.6;
     }
 
     .hero .cta-btn {
-      font-size: 1.2rem;
-      padding: 1rem 2.5rem;
+      font-size: 1.3rem;
+      padding: 1.2rem 3rem;
       background: var(--accent);
       color: white;
       border: none;
@@ -202,11 +204,12 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       width: 100%;
-      max-width: 450px;
+      max-width: 500px;
     }
 
     .auth-box h2 {
       margin-bottom: 0.5rem;
+      font-size: 2rem;
     }
 
     .auth-box p {
@@ -241,6 +244,7 @@
       border-radius: 6px;
       font-weight: 600;
       cursor: pointer;
+      font-size: 1.1rem;
     }
 
     /* Dashboard */
@@ -366,7 +370,8 @@
 
     @media (max-width: 768px) {
       .control-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 2.2rem; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero-content { padding: 2rem; }
     }
   </style>
 </head>
@@ -678,4 +683,13 @@
       });
     }
 
-    document.getElementById('form-fund').onsubmit = function(e
+    document.getElementById('form-fund').onsubmit = function(e) {
+      e.preventDefault();
+      const idx = document.getElementById('admin-user-select').value;
+      const amt = parseFloat(document.getElementById('admin-fund-amt').value);
+
+      if(idx === "" || isNaN(amt) || amt <= 0) return;
+
+      state.users[idx].balance += amt;
+      saveState();
+      
