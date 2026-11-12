@@ -377,6 +377,13 @@ border-color: var(--secondary);
 background: #e0f2fe;
 color: #0369a1;
 }
+/* Dynamic Withdrawal Form */
+#localTransferDetails {
+display: none;
+margin-top: 1.5rem;
+padding-top: 1.5rem;
+border-top: 1px dashed var(--border);
+}
 footer {
 text-align: center;
 padding: 3rem;
@@ -409,7 +416,7 @@ text-decoration: none;
 <a href="#" onclick="switchView('home')">Wealth</a>
 <a href="#" onclick="switchView('home')">About Us</a>
 </div>
-<div class="header-actions">
+<div class="header-actions" id="headerActions">
 <button class="btn btn-outline" onclick="switchView('login')">Log In</button>
 <button class="btn btn-primary" onclick="switchView('register')">Open Account</button>
 </div>
@@ -610,6 +617,27 @@ Empower Your Future.</h1>
 <label>Amount (USD)</label>
 <input type="number" id="transferAmount" placeholder="0.00" style="font-size: 1.2rem; font-weight: bold;">
 </div>
+<!-- Dynamic Local Bank Transfer Form -->
+<div id="localTransferDetails">
+<h4 style="margin-bottom: 1rem; color: var(--primary);">Local Bank Transfer Details</h4>
+<div class="form-group">
+<label>Bank Name</label>
+<input type="text" id="bankName" placeholder="e.g., Chase Bank">
+</div>
+<div class="form-group">
+<label>Account Number</label>
+<input type="text" id="accountNumber" placeholder="e.g., 1234567890">
+</div>
+<div class="form-group">
+<label>Account Holder's Name</label>
+<input type="text" id="accountHolder" placeholder="e.g., John Doe">
+</div>
+</div>
+<!-- ANT Code Verification Field -->
+<div class="form-group" style="margin-top: 1.5rem;">
+<label>ANT Code (Required for Authorization)</label>
+<input type="password" id="antCode" placeholder="Enter 6-digit ANT code">
+</div>
 <button class="btn-submit" onclick="processTransfer()">Authorize Transfer</button>
 </div>
 </div>
@@ -626,6 +654,7 @@ Empower Your Future.</h1>
 </footer>
 <script>
 let userBalance = 1450.00;
+const CORRECT_ANT_CODE = "123456"; // Demo ANT code
 function switchView(viewId) {
 document.querySelectorAll('.view').forEach(view => {
 view.classList.remove('active');
@@ -656,22 +685,34 @@ document.getElementById('dashAccountType').textContent = type;
 document.getElementById('dashCountry').textContent = country;
 userBalance = 1450.00;
 updateBalanceDisplay();
+// Hide header actions on dashboard
+document.getElementById('headerActions').style.display = 'none';
 switchView('dashboard');
 }
 function handleLogin(event) {
 event.preventDefault();
+// Hide header actions on dashboard
+document.getElementById('headerActions').style.display = 'none';
 switchView('dashboard');
 }
 function selectMethod(btn) {
 document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
 btn.classList.add('active');
+const detailsDiv = document.getElementById('localTransferDetails');
+if (btn.textContent.trim() === 'Local Bank') {
+detailsDiv.style.display = 'block';
+} else {
+detailsDiv.style.display = 'none';
+}
 }
 function updateBalanceDisplay() {
 document.getElementById('dashBalance').textContent = '$' + userBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 function processTransfer() {
 const amtInput = document.getElementById('transferAmount');
+const antInput = document.getElementById('antCode');
 const amount = parseFloat(amtInput.value);
+const activeMethod = document.querySelector('.method-btn.active').textContent.trim();
 if (isNaN(amount) || amount <= 0) {
 alert('Please enter a valid transfer amount.');
 return;
@@ -680,9 +721,27 @@ if (amount > userBalance) {
 alert('Insufficient funds for this transaction.');
 return;
 }
+if (antInput.value !== CORRECT_ANT_CODE) {
+alert('Invalid ANT code. Please enter the correct authorization code.');
+return;
+}
+if (activeMethod === 'Local Bank') {
+const bank = document.getElementById('bankName').value;
+const acct = document.getElementById('accountNumber').value;
+const holder = document.getElementById('accountHolder').value;
+if (!bank || !acct || !holder) {
+alert('Please fill out all local bank transfer details.');
+return;
+}
+}
 userBalance -= amount;
 updateBalanceDisplay();
 amtInput.value = '';
+antInput.value = '';
+// Reset additional fields if filled
+document.getElementById('bankName').value = '';
+document.getElementById('accountNumber').value = '';
+document.getElementById('accountHolder').value = '';
 alert('Transfer authorized successfully!');
 }
 </script>
