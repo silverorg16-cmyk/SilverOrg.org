@@ -381,7 +381,7 @@
   </header>
 
   <!-- VIEW 1: Landing Page -->
-  <main id="view-landing" class="view active">
+  <div id="view-landing" class="view active" style="display: flex; flex-direction: column; flex: 1;">
     <section class="hero">
       <video autoplay loop muted playsinline class="hero-bg-media">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-typing-on-a-laptop-keyboard-43093-large.mp4" type="video/mp4">
@@ -410,10 +410,10 @@
         </div>
       </div>
     </section>
-  </main>
+  </div>
 
   <!-- VIEW 2: Registration -->
-  <main id="view-register" class="view">
+  <div id="view-register" class="view" style="display: none; flex-direction: column; flex: 1;">
     <div class="auth-container">
       <div class="auth-box">
         <h2>Create Account</h2>
@@ -448,10 +448,10 @@
         </form>
       </div>
     </div>
-  </main>
+  </div>
 
   <!-- VIEW 3: Client Dashboard -->
-  <main id="view-dashboard" class="view">
+  <div id="view-dashboard" class="view" style="display: none; flex-direction: column; flex: 1;">
     <div class="dashboard">
       <div class="welcome-banner">
         <div>
@@ -485,10 +485,10 @@
         <div></div>
       </div>
     </div>
-  </main>
+  </div>
 
   <!-- VIEW 4: Admin Login -->
-  <main id="view-login" class="view">
+  <div id="view-login" class="view" style="display: none; flex-direction: column; flex: 1;">
     <div class="auth-container">
       <div class="auth-box">
         <h2>Admin Authentication</h2>
@@ -502,10 +502,10 @@
         </form>
       </div>
     </div>
-  </main>
+  </div>
 
   <!-- VIEW 5: Admin Dashboard -->
-  <main id="view-admin" class="view">
+  <div id="view-admin" class="view" style="display: none; flex-direction: column; flex: 1;">
     <div class="dashboard">
       <div class="welcome-banner" style="background: #0f172a;">
         <h2>Administrator Control Center</h2>
@@ -543,7 +543,7 @@
         </div>
       </div>
     </div>
-  </main>
+  </div>
 
   <!-- Email Simulation Modal -->
   <div id="email-modal" class="email-modal">
@@ -564,23 +564,25 @@
       localStorage.setItem('eb_users', JSON.stringify(state.users));
     }
 
-    // Router
-    const views = {
-      landing: document.getElementById('view-landing'),
-      register: document.getElementById('view-register'),
-      dashboard: document.getElementById('view-dashboard'),
-      login: document.getElementById('view-login'),
-      admin: document.getElementById('view-admin')
-    };
-
+    // Explicit Router
     function switchView(viewName) {
-      Object.keys(views).forEach(key => {
-        views[key].style.display = key === viewName ? 'flex' : 'none';
+      const allViews = ['landing', 'register', 'dashboard', 'login', 'admin'];
+      allViews.forEach(name => {
+        const el = document.getElementById('view-' + name);
+        if (el) {
+          if (name === viewName) {
+            el.style.display = 'flex';
+            el.classList.add('active');
+          } else {
+            el.style.display = 'none';
+            el.classList.remove('active');
+          }
+        }
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
       
       const headerBtn = document.getElementById('headerNavBtn');
-      if(viewName === 'landing') {
+      if (viewName === 'landing') {
         headerBtn.textContent = 'Admin Portal';
         headerBtn.onclick = () => switchView('login');
       } else {
@@ -588,7 +590,7 @@
         headerBtn.onclick = () => switchView('landing');
       }
 
-      if(viewName === 'admin') {
+      if (viewName === 'admin') {
         updateAdminView();
       }
     }
@@ -601,7 +603,7 @@
       const country = document.getElementById('reg-country').value;
       const phone = document.getElementById('reg-phone').value;
 
-      if(state.users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+      if (state.users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
         alert('User with this email already exists.');
         return;
       }
@@ -624,7 +626,7 @@
     }
 
     function updateDashboard() {
-      if(!state.currentUser) return;
+      if (!state.currentUser) return;
       document.getElementById('dash-user-name').textContent = `Welcome Back, ${state.currentUser.name}`;
       document.getElementById('dash-balance').textContent = `$${state.currentUser.balance.toFixed(2)}`;
     }
@@ -637,11 +639,11 @@
     };
 
     document.getElementById('withdraw-btn').onclick = function() {
-      if(!state.withdrawMethod) {
+      if (!state.withdrawMethod) {
         alert('Please select a withdrawal method.');
         return;
       }
-      if(!state.currentUser || state.currentUser.balance <= 0) {
+      if (!state.currentUser || state.currentUser.balance <= 0) {
         alert('Insufficient funds.');
         return;
       }
@@ -651,7 +653,7 @@
     // Admin Flow
     document.getElementById('form-login').onsubmit = function(e) {
       e.preventDefault();
-      if(document.getElementById('admin-pass').value === 'admin123') {
+      if (document.getElementById('admin-pass').value === 'admin123') {
         document.getElementById('admin-pass').value = '';
         switchView('admin');
       } else {
@@ -681,12 +683,4 @@
     document.getElementById('form-fund').onsubmit = function(e) {
       e.preventDefault();
       const idx = document.getElementById('admin-user-select').value;
-      const amt = parseFloat(document.getElementById('admin-fund-amt').value);
-
-      if(idx === "" || isNaN(amt) || amt <= 0) return;
-
-      state.users[idx].balance += amt;
-      saveState();
-      document.getElementById('admin-fund-amt').value = '';
-      
-      if(state.currentUser && state.currentUser.email === state.user
+      const amt = parseFloat(docum
