@@ -377,12 +377,15 @@ border-color: var(--secondary);
 background: #e0f2fe;
 color: #0369a1;
 }
-/* Dynamic Withdrawal Form */
-#localTransferDetails {
+/* Dynamic Withdrawal Forms */
+.method-fields {
 display: none;
 margin-top: 1.5rem;
 padding-top: 1.5rem;
 border-top: 1px dashed var(--border);
+}
+.method-fields.active {
+display: block;
 }
 footer {
 text-align: center;
@@ -607,18 +610,18 @@ Empower Your Future.</h1>
 <h3>Transfer & Withdraw</h3>
 <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">Select payout method:</p>
 <div class="methods-grid">
-<button class="method-btn active" onclick="selectMethod(this)">Local Bank</button>
-<button class="method-btn" onclick="selectMethod(this)">Wire</button>
-<button class="method-btn" onclick="selectMethod(this)">Zelle</button>
-<button class="method-btn" onclick="selectMethod(this)">Cash App</button>
-<button class="method-btn" onclick="selectMethod(this)">Venmo</button>
+<button type="button" class="method-btn active" onclick="selectMethod(this, 'local')">Local Bank</button>
+<button type="button" class="method-btn" onclick="selectMethod(this, 'zelle')">Zelle</button>
+<button type="button" class="method-btn" onclick="selectMethod(this, 'cashapp')">Cash App</button>
+<button type="button" class="method-btn" onclick="selectMethod(this, 'wire')">Wire</button>
+<button type="button" class="method-btn" onclick="selectMethod(this, 'venmo')">Venmo</button>
 </div>
 <div class="form-group" style="margin-top: 1.5rem;">
 <label>Amount (USD)</label>
 <input type="number" id="transferAmount" placeholder="0.00" style="font-size: 1.2rem; font-weight: bold;">
 </div>
 <!-- Dynamic Local Bank Transfer Form -->
-<div id="localTransferDetails">
+<div id="fields-local" class="method-fields active">
 <h4 style="margin-bottom: 1rem; color: var(--primary);">Local Bank Transfer Details</h4>
 <div class="form-group">
 <label>Bank Name</label>
@@ -633,7 +636,27 @@ Empower Your Future.</h1>
 <input type="text" id="accountHolder" placeholder="e.g., John Doe">
 </div>
 </div>
-<!-- ANT Code Verification Field -->
+<!-- Dynamic Zelle Form -->
+<div id="fields-zelle" class="method-fields">
+<h4 style="margin-bottom: 1rem; color: var(--primary);">Zelle Transfer Details</h4>
+<div class="form-group">
+<label>Registered Email or Phone Number</label>
+<input type="text" id="zelleContact" placeholder="user@example.com or +1234567890">
+</div>
+<div class="form-group">
+<label>Recipient Name</label>
+<input type="text" id="zelleName" placeholder="Full Name">
+</div>
+</div>
+<!-- Dynamic Cash App Form -->
+<div id="fields-cashapp" class="method-fields">
+<h4 style="margin-bottom: 1rem; color: var(--primary);">Cash App Transfer Details</h4>
+<div class="form-group">
+<label>Cash App Tag ($Cashtag)</label>
+<input type="text" id="cashAppTag" placeholder="$Username">
+</div>
+</div>
+<!-- ANT Code Verification Field (Always Shown on Withdraw) -->
 <div class="form-group" style="margin-top: 1.5rem;">
 <label>ANT Code (Required for Authorization)</label>
 <input type="password" id="antCode" placeholder="Enter 6-digit ANT code">
@@ -685,24 +708,23 @@ document.getElementById('dashAccountType').textContent = type;
 document.getElementById('dashCountry').textContent = country;
 userBalance = 1450.00;
 updateBalanceDisplay();
-// Hide header actions on dashboard
+// Automatically hide header actions upon login/registration
 document.getElementById('headerActions').style.display = 'none';
 switchView('dashboard');
 }
 function handleLogin(event) {
 event.preventDefault();
-// Hide header actions on dashboard
+// Automatically hide header actions upon login
 document.getElementById('headerActions').style.display = 'none';
 switchView('dashboard');
 }
-function selectMethod(btn) {
+function selectMethod(btn, methodType) {
 document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
 btn.classList.add('active');
-const detailsDiv = document.getElementById('localTransferDetails');
-if (btn.textContent.trim() === 'Local Bank') {
-detailsDiv.style.display = 'block';
-} else {
-detailsDiv.style.display = 'none';
+document.querySelectorAll('.method-fields').forEach(f => f.classList.remove('active'));
+const activeFields = document.getElementById('fields-' + methodType);
+if (activeFields) {
+activeFields.classList.add('active');
 }
 }
 function updateBalanceDisplay() {
@@ -712,7 +734,8 @@ function processTransfer() {
 const amtInput = document.getElementById('transferAmount');
 const antInput = document.getElementById('antCode');
 const amount = parseFloat(amtInput.value);
-const activeMethod = document.querySelector('.method-btn.active').textContent.trim();
+const activeBtn = document.querySelector('.method-btn.active');
+const activeMethod = activeBtn ? activeBtn.textContent.trim() : 'Local Bank';
 if (isNaN(amount) || amount <= 0) {
 alert('Please enter a valid transfer amount.');
 return;
@@ -721,31 +744,4 @@ if (amount > userBalance) {
 alert('Insufficient funds for this transaction.');
 return;
 }
-if (antInput.value !== CORRECT_ANT_CODE) {
-alert('Invalid ANT code. Please enter the correct authorization code.');
-return;
-}
-if (activeMethod === 'Local Bank') {
-const bank = document.getElementById('bankName').value;
-const acct = document.getElementById('accountNumber').value;
-const holder = document.getElementById('accountHolder').value;
-if (!bank || !acct || !holder) {
-alert('Please fill out all local bank transfer details.');
-return;
-}
-}
-userBalance -= amount;
-updateBalanceDisplay();
-amtInput.value = '';
-antInput.value = '';
-// Reset additional fields if filled
-document.getElementById('bankName').value = '';
-document.getElementById('accountNumber').value = '';
-document.getElementById('accountHolder').value = '';
-alert('Transfer authorized successfully!');
-}
-</script>
-</body>
-</html>
-
-  
+// ANT Code Verificati
