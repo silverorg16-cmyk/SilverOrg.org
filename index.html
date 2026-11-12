@@ -3,51 +3,144 @@ html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SilverOrg Bank - Private Banking</title>
+    <title>SilverOrg Bank - Secure Private Banking</title>
     <style>
         :root {
             --primary-white: #ffffff;
             --secondary-red: #8B0000;
             --bg-light-grey: #f4f4f4;
             --text-dark: #333333;
+            --text-grey: #666666;
         }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--bg-light-grey);
-            color: var(--text-dark);
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light-grey);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
         header {
             background-color: var(--primary-white);
-            border-bottom: 3px solid var(--secondary-red);
-            padding: 20px;
+            border-bottom: 4px solid var(--secondary-red);
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .logo {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             color: var(--secondary-red);
+            letter-spacing: 1px;
+        }
+        nav {
+            display: flex;
+            align-items: center;
         }
         nav a {
-            margin-left: 20px;
+            margin-left: 25px;
             text-decoration: none;
             color: var(--text-dark);
-            font-weight: 500;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--secondary-red);
         }
         .btn-login {
             background-color: var(--secondary-red);
             color: var(--primary-white);
-            padding: 10px 20px;
+            padding: 10px 25px;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 5px;
             font-weight: bold;
+            transition: background-color 0.3s;
         }
-        main {
-            padding: 40px 20px;
+        .btn-login:hover {
+            background-color: #660000;
+        }
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 5%;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1556742049-0a52d6a6d654?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            min-height: 80vh;
+        }
+        .hero-content {
+            flex: 1;
+            padding-right: 50px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            color: var(--secondary-red);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 18px;
+            color: var(--text-grey);
+            margin-bottom: 30px;
+        }
+        .hero-image {
+            flex: 1;
             text-align: center;
+        }
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .features {
+            padding: 80px 5%;
+            background-color: var(--primary-white);
+        }
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--secondary-red);
+            margin-bottom: 50px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background-color: var(--bg-light-grey);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--secondary-red);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        .feature-card p {
+            color: var(--text-grey);
+        }
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -58,17 +151,43 @@ html>
     <nav>
         <a href="#about">About Us</a>
         <a href="#services">Services</a>
-        <a href="#support">Support</a>
+        <a href="#security">Security</a>
         <a href="#" class="btn-login">Client Login</a>
     </nav>
 </header>
 
-<main>
-    <h1>Welcome to Private Banking</h1>
-    <p>Secure, tailored financial solutions for your future.</p>
-</main>
+<section class="hero">
+    <div class="hero-content">
+        <h1>Excellence in Private Banking</h1>
+        <p>Experience secure, personalized financial management tailored to your distinct goals. Advanced digital tools meet dedicated wealth advisory.</p>
+        <a href="#" class="btn-login" style="display: inline-block;">Get Started</a>
+    </div>
+    <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Professional using digital banking">
+    </div>
+</section>
+
+<section class="features" id="services">
+    <h2 class="section-title">Our Core Services</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>Private Wealth Management</h3>
+            <p>Dedicated advisors providing bespoke investment strategies and portfolio oversight.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Secure Digital Banking</h3>
+            <p>24/7 account access with multi-factor authentication and real-time transaction monitoring.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Global Transfer Services</h3>
+            <p>Seamless, encrypted international wire transfers with competitive exchange rates.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 SilverOrg Bank. All rights reserved. Simulated demonstration environment.</p>
+</footer>
 
 </body>
 </html>
-
-  
