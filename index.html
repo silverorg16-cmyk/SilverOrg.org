@@ -34,7 +34,6 @@
       flex-direction: column;
     }
 
-    /* Header */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -52,31 +51,12 @@
       font-weight: 800;
       color: var(--primary);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
 
     .logo span {
       color: var(--accent);
     }
 
-    .nav-btn {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .nav-btn:hover {
-      background: var(--accent-hover);
-    }
-
-    /* Views */
     .view {
       display: none;
       flex: 1;
@@ -87,7 +67,6 @@
       flex-direction: column;
     }
 
-    /* Hero Section */
     .hero {
       position: relative;
       min-height: 90vh;
@@ -115,32 +94,33 @@
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 900px;
-      background: rgba(15, 23, 42, 0.8);
+      max-width: 950px;
+      background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(12px);
-      padding: 4rem;
+      padding: 5rem 3rem;
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.15);
       margin: 0 1rem;
+      width: 100%;
     }
 
     .hero h1 {
-      font-size: 4rem;
+      font-size: 4.5rem;
       margin-bottom: 1.5rem;
       font-weight: 800;
       line-height: 1.1;
     }
 
     .hero p {
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       color: #94a3b8;
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
       line-height: 1.6;
     }
 
-    .hero .cta-btn {
-      font-size: 1.3rem;
-      padding: 1.2rem 3rem;
+    .cta-btn {
+      font-size: 1.4rem;
+      padding: 1.25rem 3.5rem;
       background: var(--accent);
       color: white;
       border: none;
@@ -148,48 +128,14 @@
       font-weight: 700;
       cursor: pointer;
       transition: transform 0.2s, background 0.2s;
-      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5);
+      box-shadow: 0 4px 25px rgba(37, 99, 235, 0.6);
     }
 
-    .hero .cta-btn:hover {
+    .cta-btn:hover {
       transform: scale(1.05);
       background: var(--accent-hover);
     }
 
-    /* Features Section */
-    .features {
-      padding: 5rem 5%;
-      background: var(--surface);
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      padding: 2rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-
-    .card h3 {
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-
-    /* Auth Forms */
     .auth-container {
       flex: 1;
       display: flex;
@@ -247,10 +193,13 @@
       font-size: 1.1rem;
     }
 
-    /* Dashboard */
+    .submit-btn:hover {
+      background: var(--accent-hover);
+    }
+
     .dashboard {
       padding: 2rem 5%;
-      max-width: 1400px;
+      max-width: 1200px;
       margin: 0 auto;
       flex: 1;
       width: 100%;
@@ -259,7 +208,7 @@
     .welcome-banner {
       background: var(--primary);
       color: white;
-      padding: 2rem;
+      padding: 2.5rem;
       border-radius: var(--radius);
       margin-bottom: 2rem;
       display: flex;
@@ -267,67 +216,41 @@
       align-items: center;
     }
 
+    .logout-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background: #dc2626;
+    }
+
     .balance-card {
       background: linear-gradient(135deg, var(--accent), var(--accent-hover));
       color: white;
-      padding: 2rem;
+      padding: 2.5rem;
       border-radius: var(--radius);
       margin-bottom: 2rem;
-      max-width: 400px;
+      max-width: 450px;
     }
 
     .balance-card h3 {
       font-weight: 400;
       opacity: 0.9;
+      font-size: 1.1rem;
     }
 
     .balance-amount {
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: 700;
       margin: 0.5rem 0;
     }
 
-    .control-grid {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 2rem;
-    }
-
-    .panel {
-      background: var(--surface);
-      padding: 2rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .panel h3 {
-      margin-bottom: 1.5rem;
-    }
-
-    .withdraw-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-      gap: 1rem;
-    }
-
-    .withdraw-option {
-      padding: 1rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      text-align: center;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    .withdraw-option:hover, .withdraw-option.selected {
-      border-color: var(--accent);
-      background: #eff6ff;
-    }
-
-    /* Email Modal */
     .email-modal {
       display: none;
       position: fixed;
@@ -347,46 +270,16 @@
       from { transform: translateX(100%); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
     }
-
-    /* Admin specific */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-
-    th, td {
-      text-align: left;
-      padding: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .admin-fund-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    @media (max-width: 768px) {
-      .control-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 2.5rem; }
-      .hero-content { padding: 2rem; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header>
     <div class="logo" onclick="switchView('landing')">EB<span>Bank</span></div>
-    <div>
-      <button class="nav-btn" id="headerNavBtn" onclick="switchView('login')">Admin Portal</button>
-    </div>
   </header>
 
   <!-- VIEW 1: Landing Page -->
-  <main id="view-landing" class="view active">
+  <main id="view-landing" class="view active" style="display: flex;">
     <section class="hero">
       <video autoplay loop muted playsinline class="hero-bg-media">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-typing-on-a-laptop-keyboard-43093-large.mp4" type="video/mp4">
@@ -395,24 +288,6 @@
         <h1>Banking Built For The Digital Age</h1>
         <p>Experience secure, fast, and reliable global financial services at your fingertips. High-class security meets modern convenience.</p>
         <button class="cta-btn" onclick="switchView('register')">Get Started</button>
-      </div>
-    </section>
-
-    <section class="features">
-      <h2 class="section-title">Why Choose EB Bank</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Ironclad Security</h3>
-          <p>Multi-layer encryption ensuring your assets and data remain strictly confidential.</p>
-        </div>
-        <div class="card">
-          <h3>Global Transfers</h3>
-          <p>Send and receive funds globally using local banks, wire, or major digital wallets effortlessly.</p>
-        </div>
-        <div class="card">
-          <h3>24/7 Support</h3>
-          <p>Dedicated financial concierge services available round the clock for all account tiers.</p>
-        </div>
       </div>
     </section>
   </main>
@@ -445,10 +320,6 @@
             <label>Phone Number</label>
             <input type="tel" id="reg-phone" required placeholder="+1 234 567 8900">
           </div>
-          <div class="form-group">
-            <label>Government ID Upload (Verification)</label>
-            <input type="file" required accept="image/*">
-          </div>
           <button type="submit" class="submit-btn">Complete Registration</button>
         </form>
       </div>
@@ -460,236 +331,85 @@
     <div class="dashboard">
       <div class="welcome-banner">
         <div>
-          <h2 id="dash-user-name">Welcome Back</h2>
-          <p>Account Status: <span style="color: var(--success); font-weight: bold;">Verified</span></p>
+          <h2 id="dash-user-name" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Welcome Back</h2>
+          <p>Account Status: <span style="color: var(--success); font-weight: bold;">Active & Verified</span></p>
         </div>
-        <button class="nav-btn" style="background: #ef4444;" onclick="switchView('landing')">Log Out</button>
+        <button class="logout-btn" onclick="switchView('landing')">Log Out</button>
       </div>
 
       <div class="balance-card">
-        <h3>Total Balance</h3>
+        <h3>Total Available Balance</h3>
         <div class="balance-amount" id="dash-balance">$0.00</div>
-        <p>Instant Liquidity Available</p>
-      </div>
-
-      <div class="control-grid">
-        <div class="panel">
-          <h3>Quick Transfer / Withdraw</h3>
-          <p style="margin-bottom: 1rem; color: var(--text-muted);">Select destination method:</p>
-          <div class="withdraw-grid" id="withdraw-options">
-            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Local Bank</div>
-            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Wire Transfer</div>
-            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Cash App</div>
-            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Venmo</div>
-            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Zelle</div>
-            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Wise</div>
-            <div class="withdraw-option" onclick="selectWithdrawMethod(this)">Skrill</div>
-          </div>
-          <button style="margin-top: 1.5rem; width: 100%;" class="submit-btn" id="withdraw-btn">Proceed to Transfer</button>
-        </div>
-        <div></div>
-      </div>
-    </div>
-  </main>
-
-  <!-- VIEW 4: Admin Login -->
-  <main id="view-login" class="view">
-    <div class="auth-container">
-      <div class="auth-box">
-        <h2>Admin Authentication</h2>
-        <p>Enter administrative credentials.</p>
-        <form id="form-login">
-          <div class="form-group">
-            <label>Master Passcode</label>
-            <input type="password" id="admin-pass" required placeholder="••••">
-          </div>
-          <button type="submit" class="submit-btn" style="background: #0f172a;">Authenticate</button>
-        </form>
-      </div>
-    </div>
-  </main>
-
-  <!-- VIEW 5: Admin Dashboard -->
-  <main id="view-admin" class="view">
-    <div class="dashboard">
-      <div class="welcome-banner" style="background: #0f172a;">
-        <h2>Administrator Control Center</h2>
-        <button class="nav-btn" style="background: #ef4444;" onclick="switchView('landing')">Sign Out</button>
-      </div>
-      <div class="control-grid">
-        <div class="panel">
-          <h3>Fund Client Account</h3>
-          <form id="form-fund" class="admin-fund-form">
-            <div class="form-group" style="margin-bottom: 0;">
-              <label>Select Client</label>
-              <select id="admin-user-select" required></select>
-            </div>
-            <div class="form-group" style="margin-bottom: 0;">
-              <label>Amount ($)</label>
-              <input type="number" id="admin-fund-amt" step="any" required placeholder="0.00">
-            </div>
-            <button type="submit" class="submit-btn" style="background: #0f172a;">Credit Account</button>
-          </form>
-        </div>
-        <div class="panel">
-          <h3>Client Directory</h3>
-          <div style="overflow-x: auto;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Balance</th>
-                </tr>
-              </thead>
-              <tbody id="admin-user-list"></tbody>
-            </table>
-          </div>
-        </div>
+        <p>Instant Liquidity Ready</p>
       </div>
     </div>
   </main>
 
   <!-- Email Simulation Modal -->
   <div id="email-modal" class="email-modal">
-    <div style="font-weight: bold; margin-bottom: 0.5rem;">✉️ New Notification</div>
+    <div style="font-weight: bold; margin-bottom: 0.5rem;">✉️ Welcome Email Triggered</div>
     <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem;">Subject: Welcome to EB Bank!</div>
     <div id="email-body" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;"></div>
   </div>
 
   <script>
-    // State Management
     const state = {
-      users: JSON.parse(localStorage.getItem('eb_users')) || [],
-      currentUser: null,
-      withdrawMethod: null
+      currentUser: null
     };
 
-    function saveState() {
-      localStorage.setItem('eb_users', JSON.stringify(state.users));
-    }
-
-    // Router
-    const views = {
-      landing: document.getElementById('view-landing'),
-      register: document.getElementById('view-register'),
-      dashboard: document.getElementById('view-dashboard'),
-      login: document.getElementById('view-login'),
-      admin: document.getElementById('view-admin')
-    };
-
-    function switchView(viewName) {
-      Object.keys(views).forEach(key => {
-        views[key].style.display = key === viewName ? 'flex' : 'none';
+    window.switchView = function(viewName) {
+      const allViews = ['landing', 'register', 'dashboard'];
+      allViews.forEach(name => {
+        const el = document.getElementById('view-' + name);
+        if (el) {
+          if (name === viewName) {
+            el.style.display = 'flex';
+            el.classList.add('active');
+          } else {
+            el.style.display = 'none';
+            el.classList.remove('active');
+          }
+        }
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      
-      const headerBtn = document.getElementById('headerNavBtn');
-      if(viewName === 'landing') {
-        headerBtn.textContent = 'Admin Portal';
-        headerBtn.onclick = () => switchView('login');
-      } else {
-        headerBtn.textContent = 'Home';
-        headerBtn.onclick = () => switchView('landing');
-      }
-
-      if(viewName === 'admin') {
-        updateAdminView();
-      }
-    }
-
-    // Registration Flow
-    document.getElementById('form-register').onsubmit = function(e) {
-      e.preventDefault();
-      const name = document.getElementById('reg-name').value;
-      const email = document.getElementById('reg-email').value;
-      const country = document.getElementById('reg-country').value;
-      const phone = document.getElementById('reg-phone').value;
-
-      if(state.users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
-        alert('User with this email already exists.');
-        return;
-      }
-
-      const newUser = { name, email, country, phone, balance: 0.00 };
-      state.users.push(newUser);
-      saveState();
-      state.currentUser = newUser;
-
-      triggerEmail(email, `Dear ${name},<br><br>Welcome to EB Bank! Your account has been initialized successfully. Your starting balance is $0.00.<br><br>Best regards,<br>EB Bank Team`);
-      updateDashboard();
-      switchView('dashboard');
     };
 
+    const regForm = document.getElementById('form-register');
+    if (regForm) {
+      regForm.onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('reg-name').value;
+        const email = document.getElementById('reg-email').value;
+        const country = document.getElementById('reg-country').value;
+        const phone = document.getElementById('reg-phone').value;
+
+        state.currentUser = { name, email, country, phone, balance: 0.00 };
+
+        triggerEmail(email, `Dear ${name},<br><br>Welcome to EB Bank! Your account has been initialized successfully. Your starting balance is $0.00.<br><br>Best regards,<br>EB Bank Team`);
+        updateDashboard();
+        window.switchView('dashboard');
+      };
+    }
+
     function triggerEmail(email, body) {
-      document.getElementById('email-body').innerHTML = `<strong>To:</strong> ${email}<br><br>${body}`;
+      const emailBody = document.getElementById('email-body');
+      if (!emailBody) return;
+      emailBody.innerHTML = `<strong>To:</strong> ${email}<br><br>${body}`;
       const modal = document.getElementById('email-modal');
-      modal.style.display = 'block';
-      setTimeout(() => { modal.style.display = 'none'; }, 8000);
+      if (modal) {
+        modal.style.display = 'block';
+        setTimeout(() => { modal.style.display = 'none'; }, 8000);
+      }
     }
 
     function updateDashboard() {
-      if(!state.currentUser) return;
-      document.getElementById('dash-user-name').textContent = `Welcome Back, ${state.currentUser.name}`;
-      document.getElementById('dash-balance').textContent = `$${state.currentUser.balance.toFixed(2)}`;
+      if (!state.currentUser) return;
+      const nameEl = document.getElementById('dash-user-name');
+      const balEl = document.getElementById('dash-balance');
+      if (nameEl) nameEl.textContent = `Welcome Back, ${state.currentUser.name}`;
+      if (balEl) balEl.textContent = `$${state.currentUser.balance.toFixed(2)}`;
     }
+  </script>
+</body>
+</html>
 
-    // Withdrawal Flow
-    window.selectWithdrawMethod = function(el) {
-      document.querySelectorAll('.withdraw-option').forEach(opt => opt.classList.remove('selected'));
-      el.classList.add('selected');
-      state.withdrawMethod = el.textContent;
-    };
-
-    document.getElementById('withdraw-btn').onclick = function() {
-      if(!state.withdrawMethod) {
-        alert('Please select a withdrawal method.');
-        return;
-      }
-      if(!state.currentUser || state.currentUser.balance <= 0) {
-        alert('Insufficient funds.');
-        return;
-      }
-      alert(`Withdrawal request of $${state.currentUser.balance.toFixed(2)} via ${state.withdrawMethod} submitted.`);
-    };
-
-    // Admin Flow
-    document.getElementById('form-login').onsubmit = function(e) {
-      e.preventDefault();
-      if(document.getElementById('admin-pass').value === 'admin123') {
-        document.getElementById('admin-pass').value = '';
-        switchView('admin');
-      } else {
-        alert('Invalid Passcode.');
-      }
-    };
-
-    function updateAdminView() {
-      const select = document.getElementById('admin-user-select');
-      const tbody = document.getElementById('admin-user-list');
-      
-      select.innerHTML = '<option value="" disabled selected>Choose a user</option>';
-      tbody.innerHTML = '';
-
-      state.users.forEach((user, index) => {
-        const opt = document.createElement('option');
-        opt.value = index;
-        opt.textContent = `${user.name} (${user.email})`;
-        select.appendChild(opt);
-
-        const row = document.createElement('tr');
-        row.innerHTML = `<td>${user.name}</td><td>${user.email}</td><td style="font-weight:bold; color:var(--success);">$${user.balance.toFixed(2)}</td>`;
-        tbody.appendChild(row);
-      });
-    }
-
-    document.getElementById('form-fund').onsubmit = function(e) {
-      e.preventDefault();
-      const idx = document.getElementById('admin-user-select').value;
-      const amt = parseFloat(document.getElementById('admin-fund-amt').value);
-
-      if(idx === "" || isNaN(amt) || amt <= 0) return;
-
-      state.users[idx].balance += amt;
-      saveState();
-      
